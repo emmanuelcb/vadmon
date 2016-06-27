@@ -31,4 +31,4 @@ pg_query("CREATE TABLE `vadmon_contenidos` (
    PRIMARY KEY (`id`)) 
   ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ");
 ?>
-<script languaje='javascript' type='text/javascript'>//window.close();</script>
+<script languaje='javascript' type='text/javascript'>window.close();</script>
