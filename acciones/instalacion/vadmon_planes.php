@@ -10,6 +10,7 @@ $strCreatePlanesTableSQL .= ');';
 $strCreatePlanesTableSQLName = 'createPlanes';
 if(pg_prepare($planconexion, $strCreatePlanesTableSQLName, $strCreatePlanesTableSQL))
 {
+  	echo 'i\'m in';
 	$result = pg_execute($planconexion, $strCreatePlanesTableSQLName);
 }
 ?>
