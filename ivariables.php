@@ -65,11 +65,13 @@ $peliminar='';
 if($archivoActual <> "index.php")
 {
 	/*REVISO SI EL SISTEMA ESTA ACTUALIZADO */
-	$versionCliente='';
-	if($stmtExisteVersion = $conexion->prepare("SHOW TABLES LIKE 'vadmon_version'")) {
-		$stmtExisteVersion->execute();
-		$stmtExisteVersion->store_result();
-		if($stmtExisteVersion->num_rows == '') {
+	$versionCliente = '';
+  	$strVersionTableSQL = 'SHOW TABLES LIKE vadmon_version';
+  	$strVersionTableSQLName = 'isThereExistingVersionTable'
+	if(pg_prepare($planconexion, $strVersionTableSQLName, $strVersionTableSQL)) {
+      	$result = pg_execute($conexion, $strVersionTableSQLName);
+  		$fetchArr = pg_fetch_all($result);
+		if(sizeof($fecthArray) == 0) {
 			include("acciones/instalacion/vadmon_version.php");
 		}
 	}
