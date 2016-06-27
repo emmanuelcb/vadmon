@@ -6,7 +6,7 @@ if($_COOKIE['passBase'] <> 'ninguna'){ $passBase = $_COOKIE['passBase']; }else{ 
 $charset = $_COOKIE['charset'];
 $cotejamiento = $_COOKIE['cotejamiento'];
 
-$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
+/*$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
 echo $conexion;
 mysql_select_db($baseDatos, $conexion);
 
@@ -29,6 +29,6 @@ mysql_query("CREATE TABLE `vadmon_contenidos` (
   `fijo` int(11) default '0',
   `activo` int(11) default '1',
    PRIMARY KEY (`id`)) 
-  ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ") ;
+  ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ") ;*/
 ?>
-<script languaje='javascript' type='text/javascript'>window.close();</script>
+<script languaje='javascript' type='text/javascript'>//window.close();</script>
