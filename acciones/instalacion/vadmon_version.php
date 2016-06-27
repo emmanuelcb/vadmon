@@ -1,14 +1,14 @@
 <?php
 // Creamos la tabla
-if($stmtCrearVersion = $conexion->prepare("CREATE TABLE `vadmon_version` (
-																					`id` int(11) NOT NULL auto_increment,
-																					`version` varchar(255) NOT NULL,
-																					PRIMARY KEY(`id`)) ENGINE=MyISAM")){
-	$stmtCrearVersion->execute();
+$strCreateVersionTableSQL = 'CREATE TABLE vadmon_version(id SERIAL PRIMARY KEY, version VARCHAR(255) NOT NULL)';
+$strCreateVersionTableSQLName = 'createVersionTable';
+if(pg_prepare($conexion, $strCreateVersionTableSQLName, $strCreateVersionTableSQL)) {
+	$result = pg_execute($conexion, $strCreateVersionTableSQLName);
 }
 // Colocamos la version actual
-if($stmtInsertarVersion = $conexion->prepare("INSERT INTO vadmon_version (version) VALUES (?)")){
-	$stmtInsertarVersion->bind_param("i",$version_vadmon);
-	$stmtInsertarVersion->execute();
+$strInsertVersionSQL = 'INSERT INTO vadmon_version (version) VALUES ($1)';
+$strInsertVersionSQLName = 'insertVersion';
+if(pg_prepare($conexion, $strInsertVersionSQLName, $strInsertVersionSQL)){
+  	$result = pg_execute($conexion, $strCreateVersionTableSQLName, array($version_vadmon));
 }
 ?>
