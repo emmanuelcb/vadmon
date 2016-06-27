@@ -8,7 +8,5 @@ $strCreatePlanesTableSQL .= 'servidorusuario VARCHAR(255) NOT NULL, servidorpass
 $strCreatePlanesTableSQL .= 'servidorftpusuario VARCHAR(255) NOT NULL, servidorftppass VARCHAR(255) NOT NULL, activo BOOLEAN DEFAULT TRUE';
 $strCreatePlanesTableSQL .= ');';
 $strCreatePlanesTableSQLName = 'createPlanes';
-echo $strCreatePlanesTableSQL;
-$rslt = pg_query($planconexion, $strCreatePlanesTableSQLName);
-echo $rslt;
+pg_query($planconexion, $strCreatePlanesTableSQL);
 ?>
