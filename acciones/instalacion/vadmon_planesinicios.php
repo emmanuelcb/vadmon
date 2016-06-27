@@ -1,11 +1,12 @@
 <?php
 // Creamos la tabla
-if($stmtCrearVadmonPlanesInicios = $planconexion->prepare(  "CREATE TABLE `vadmon_planesinicios` (
-                                                            `id` smallint(5) NOT NULL auto_increment,
-                                                            `idusuario` varchar(30) NOT NULL,
-                                                            `tiempo` time,
-                                                            PRIMARY KEY (`id`)) ENGINE=MyISAM"  ))
+$strCreatePlanesIniciosTable = '';
+$strCreatePlanesIniciosTable .= 'CREATE TABLE vadmon_planesinicios (';
+$strCreatePlanesIniciosTable .= 'id SERIAL PRIMARY KEY, idusuario VARCHAR(30) NOT NULL, tiempo TIME';
+$strCreatePlanesIniciosTable .= ');';
+$strCreatePlanesIniciosTableName = 'createPlanesIniciosTable';
+if(pg_prepare($planconexion, $strCreatePlanesIniciosTableName, $strCreatePlanesIniciosTable))
 {
-	$stmtCrearVadmonPlanesInicios->execute();
+	$result = pg_execute($planconexion, $strCreatePlanesIniciosTableName);
 }
 ?>
