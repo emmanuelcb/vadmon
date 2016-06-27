@@ -6,7 +6,10 @@ if($_COOKIE['passBase'] <> 'ninguna'){ $passBase = $_COOKIE['passBase']; }else{ 
 $charset = $_COOKIE['charset'];
 $cotejamiento = $_COOKIE['cotejamiento'];
 
-$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
+$strPgConnection = 'dbname='.$baseDatos.' host='.$servidor.' port=5432 ';	
+$strPgConnection .= 'user='.$usuarioBase.' password='.$passBase.' sslmode=require';
+$conexion = pg_connect($strPgConnection);
+//$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
 echo $conexion;
 /*mysql_select_db($baseDatos, $conexion);
 
