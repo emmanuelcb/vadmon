@@ -10,23 +10,12 @@ $strPgConnection = 'dbname='.$baseDatos.' host='.$servidor.' port=5432 ';
 $strPgConnection .= 'user='.$usuarioBase.' password='.$passBase.' sslmode=require';
 $conexion = pg_connect($strPgConnection);
 
-pg_query("CREATE TABLE `vadmon_noticias` (
-  `id` int(2) NOT NULL auto_increment,
-  `titulonoticia` varchar(255) collate ".$cotejamiento." default NULL,
-  `textonoticia` text collate ".$cotejamiento.",
-  `imagen1noticia` varchar(255) collate ".$cotejamiento." default NULL,
-  `imagen2noticia` varchar(255) collate ".$cotejamiento." default NULL,
-  `imagen3noticia` varchar(255) collate ".$cotejamiento." default NULL,
-  `fechanoticia` date default NULL,
-  `creador` varchar(255) collate ".$cotejamiento." default NULL,
-  `fechacreacion` date default NULL,
-  `modificador` varchar(255) collate ".$cotejamiento." default NULL,
-  `fechamodificacion` date default NULL,
-  `keywordsnoticia` varchar(255) collate ".$cotejamiento." default NULL,
-  `descripcionnoticia` varchar(255) collate ".$cotejamiento." default NULL,
-  `fijo` int(11) default '0',
-  `activo` int(1) default '0',
-  PRIMARY KEY  (`id`))
-  ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ") ;
+$qryCreateTable = "CREATE TABLE vadmon_noticias (";
+$qryCreateTable .="id SERIAL PRIMARY KEY, titulonoticia VARCHAR(255) DEFAULT NULL, textonoticia TEXT,";
+$qryCreateTable .="imagen1noticia VARCHAR(255) DEFAULT NULL, imagen2noticia VARCHAR(255) DEFAULT NULL, imagen3noticia VARCHAR(255) DEFAULT NULL,";
+$qryCreateTable .="fechanoticia DATE DEFAULT NULL, creador VARCHAR(255) DEFAULT NULL, fechacreacion DATE DEFAULT NULL,";
+$qryCreateTable .="modificador VARCHAR(255) DEFAULT NULL, fechamodificacion DATE DEFAULT NULL, keywordsnoticia";
+$qryCreateTable .="descripcionnoticia VARCHAR(255) DEFAULT NULL, fijo INTEGER DEFAULT 0, activo INTEGER DEFAULT 0";
+$result = pg_query($conexion, $qryCreateTable);
 ?>
 <script languaje='javascript' type='text/javascript'>window.close();</script>
