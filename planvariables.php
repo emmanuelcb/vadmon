@@ -1,7 +1,6 @@
 <?php
 // Revisa si la tabla de planes esta instalada
-echo 'instalando planes';
-$sqlPlanesTable = "SHOW TABLES LIKE vadmon_planes";
+$sqlPlanesTable = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'vadmon_planes'";
 $sqlPlanesName = "isThereExistingPlanesTable";
 if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
 {
@@ -12,8 +11,7 @@ if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
   }
 }
 //Revisa si la tabla de inicios esta instalada
-echo 'instalando planes inicios';
-$sqlPlanesIniciosTable = "SHOW TABLES LIKE vadmon_planesinicios";
+$sqlPlanesIniciosTable = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'vadmon_planesinicios'";
 $sqlPlanesIniciosName = "isThereExistingPlanesIniciosTable";
 if(pg_prepare($planconexion, $sqlPlanesIniciosName, $sqlPlanesIniciosTable))
 {
