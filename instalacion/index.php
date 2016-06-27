@@ -47,7 +47,7 @@
                         <td>
                           <select name="cotejamiento" class="inputNormal">
                           	<option value="utf8_unicode_ci">utf8_unicode_ci</option>
-                          	<option value="latin1_general_cs">latin1_general_cs</option>
+                          	<option value="latin1_general_ci">latin1_general_ci</option>
                           	<option value="ascii_general_ci">ascii_general_ci</option>
                           	<option value="utf8_bin">utf8_bin</option>
                           	<option value="latin1_bin">latin1_bin</option>
