@@ -10,6 +10,6 @@ $strCreatePlanesTableSQL .= ');';
 $strCreatePlanesTableSQLName = 'createPlanes';
 if(pg_prepare($planconexion, $strCreatePlanesTableSQLName, $strCreatePlanesTableSQL))
 {
-	$stmtCrearVadmonPlanes->execute();
+	$result = pg_execute($planconexion, $strCreatePlanesTableSQLName);
 }
 ?>
