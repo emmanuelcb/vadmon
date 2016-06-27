@@ -10,7 +10,7 @@ $strPgConnection = 'dbname='.$baseDatos.' host='.$servidor.' port=5432 ';
 $strPgConnection .= 'user='.$usuarioBase.' password='.$passBase.' sslmode=require';
 $conexion = pg_connect($strPgConnection);
 
-pg_query($conexion, "CREATE TABLE `vadmon_contenidos` (
+$result = pg_query($conexion, "CREATE TABLE `vadmon_contenidos` (
   `id` int(11) NOT NULL auto_increment,
   `subcontenido` varchar(255) collate ".$cotejamiento." default '0',
   `menucontenido` varchar(255) collate ".$cotejamiento." default NULL,
@@ -31,4 +31,5 @@ pg_query($conexion, "CREATE TABLE `vadmon_contenidos` (
    PRIMARY KEY (`id`)) 
   ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ");
 ?>
-<script languaje='javascript' type='text/javascript'>window.close();</script>
+<script languaje='javascript' type='text/javascript'>//window.close();</script>
+<?php echo $result ?>
