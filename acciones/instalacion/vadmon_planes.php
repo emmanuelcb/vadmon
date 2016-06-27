@@ -8,6 +8,8 @@ $strCreatePlanesTableSQL .= 'servidorusuario VARCHAR(255) NOT NULL, servidorpass
 $strCreatePlanesTableSQL .= 'servidorftpusuario VARCHAR(255) NOT NULL, servidorftppass VARCHAR(255) NOT NULL, activo BOOLEAN DEFAULT TRUE';
 $strCreatePlanesTableSQL .= ');';
 $strCreatePlanesTableSQLName = 'createPlanes';
+echo 'vadmon_planes';
+echo pg_prepare($planconexion, $strCreatePlanesTableSQLName, $strCreatePlanesTableSQL);
 if(pg_prepare($planconexion, $strCreatePlanesTableSQLName, $strCreatePlanesTableSQL))
 {
   	echo 'i\'m in';
