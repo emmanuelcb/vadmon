@@ -1,19 +1,23 @@
 <?php
 // Revisa si la tabla de planes esta instalada
-if($stmtExistePlanes = $planconexion->prepare("SHOW TABLES LIKE 'vadmon_planes'"))
+$sqlPlanesTable = "SHOW TABLES LIKE vadmon_planes";
+$sqlPlanesName = "isThereExistingPlanesTable";
+if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
 {
-  $stmtExistePlanes->execute();
-  $stmtExistePlanes->store_result();
-  if($stmtExistePlanes->num_rows == 0) {
+  $result = pg_execute($planconexion, $sqlPlanesName);
+  $fetchArr = pg_fetch_all($result);
+  if(sizeof($fetchArr) == 0) {
     include("acciones/instalacion/vadmon_planes.php");
   }
 }
 //Revisa si la tabla de inicios esta instalada
-if($stmtExistePlanesInicios = $planconexion->prepare("SHOW TABLES LIKE 'vadmon_planesinicios'"))
+$sqlPlanesIniciosTable = "SHOW TABLES LIKE vadmon_planesinicios";
+$sqlPlanesIniciosName = "isThereExistingPlanesIniciosTable";
+if(pg_prepare($planconexion, $sqlPlanesIniciosName, $sqlPlanesIniciosTable))
 {
-  $stmtExistePlanesInicios->execute();
-  $stmtExistePlanesInicios->store_result();
-  if($stmtExistePlanesInicios->num_rows == 0) {
+  $result = pg_execute($planconexion, $sqlPlanesName);
+  $fetchArr = pg_fetch_all($result);
+  if(sizeof($fetchArr) == 0) {
     include("acciones/instalacion/vadmon_planesinicios.php");
   }
 }
