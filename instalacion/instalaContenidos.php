@@ -9,11 +9,8 @@ $cotejamiento = $_COOKIE['cotejamiento'];
 $strPgConnection = 'dbname='.$baseDatos.' host='.$servidor.' port=5432 ';	
 $strPgConnection .= 'user='.$usuarioBase.' password='.$passBase.' sslmode=require';
 $conexion = pg_connect($strPgConnection);
-//$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
-echo $conexion;
-/*mysql_select_db($baseDatos, $conexion);
 
-mysql_query("CREATE TABLE `vadmon_contenidos` (
+pg_query("CREATE TABLE `vadmon_contenidos` (
   `id` int(11) NOT NULL auto_increment,
   `subcontenido` varchar(255) collate ".$cotejamiento." default '0',
   `menucontenido` varchar(255) collate ".$cotejamiento." default NULL,
@@ -32,6 +29,6 @@ mysql_query("CREATE TABLE `vadmon_contenidos` (
   `fijo` int(11) default '0',
   `activo` int(11) default '1',
    PRIMARY KEY (`id`)) 
-  ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ") ;*/
+  ENGINE=MyISAM DEFAULT CHARSET=".$charset." COLLATE=".$cotejamiento." ");
 ?>
 <script languaje='javascript' type='text/javascript'>//window.close();</script>
