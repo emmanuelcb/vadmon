@@ -2,6 +2,7 @@
 // Revisa si la tabla de planes esta instalada
 $sqlPlanesTable = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'vadmon_planes'";
 $sqlPlanesName = "isThereExistingPlanesTable";
+echo pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable);
 if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
 {
   $result = pg_execute($planconexion, $sqlPlanesName);
@@ -14,6 +15,7 @@ if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
 //Revisa si la tabla de inicios esta instalada
 $sqlPlanesIniciosTable = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'vadmon_planesinicios'";
 $sqlPlanesIniciosName = "isThereExistingPlanesIniciosTable";
+echo pg_prepare($planconexion, $sqlPlanesIniciosName, $sqlPlanesIniciosTable);
 if(pg_prepare($planconexion, $sqlPlanesIniciosName, $sqlPlanesIniciosTable))
 {
   $result = pg_execute($planconexion, $sqlPlanesName);
