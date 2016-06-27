@@ -6,7 +6,6 @@ if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
 {
   $result = pg_execute($planconexion, $sqlPlanesName);
   $fetchArr = pg_fetch_all($result);
-  echo sizeof($fetchArr);
   if(sizeof($fetchArr) == 0) {
     include("acciones/instalacion/vadmon_planes.php");
   }
