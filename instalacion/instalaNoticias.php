@@ -14,8 +14,8 @@ $qryCreateTable = "CREATE TABLE vadmon_noticias (";
 $qryCreateTable .="id SERIAL PRIMARY KEY, titulonoticia VARCHAR(255) DEFAULT NULL, textonoticia TEXT,";
 $qryCreateTable .="imagen1noticia VARCHAR(255) DEFAULT NULL, imagen2noticia VARCHAR(255) DEFAULT NULL, imagen3noticia VARCHAR(255) DEFAULT NULL,";
 $qryCreateTable .="fechanoticia DATE DEFAULT NULL, creador VARCHAR(255) DEFAULT NULL, fechacreacion DATE DEFAULT NULL,";
-$qryCreateTable .="modificador VARCHAR(255) DEFAULT NULL, fechamodificacion DATE DEFAULT NULL, keywordsnoticia";
-$qryCreateTable .="descripcionnoticia VARCHAR(255) DEFAULT NULL, fijo INTEGER DEFAULT 0, activo INTEGER DEFAULT 0";
+$qryCreateTable .="modificador VARCHAR(255) DEFAULT NULL, fechamodificacion DATE DEFAULT NULL, keywordsnoticia,";
+$qryCreateTable .="descripcionnoticia VARCHAR(255) DEFAULT NULL, fijo INTEGER DEFAULT 0, activo INTEGER DEFAULT 0);";
 $result = pg_query($conexion, $qryCreateTable);
 ?>
 <script languaje='javascript' type='text/javascript'>window.close();</script>
