@@ -14,22 +14,23 @@ class inicioSesionVAdmonClass {
 	}
 	
 	function inicioSesionVAdmon($usuario, $contrasenia, $planconexion) {
+      	$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE usuario = $1 LIMIT 1";
+      	$sqlName = "getUser";
 		//Uso de sentencias preparadas significa que la inyección de SQL no es posible.
-		if ($stmtVAdmon = $planconexion->prepare("SELECT id, usuario, contrasenia FROM vadmon_planes WHERE usuario = ? LIMIT 1")) {
+		if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
 			//$contrasenia = hash('sha256', $contrasenia);
-			$stmtVAdmon->bind_param('s', $usuario); //Liga "$usuario" a parámetro.
-			$stmtVAdmon->execute(); //Ejecuta la consulta preparada.
-			$stmtVAdmon->store_result();
-			$stmtVAdmon->bind_result($idUsuario, $nombreUsuario, $contraseniaBd); //Obtiene las variables del resultado.
-			$stmtVAdmon->fetch();
-			if($stmtVAdmon->num_rows == 1) { //Si el usuario existe.
+          	$result = pg_execute($planconexion, $sqlName, array($usuario));
+          	$fetchArr = pg_fetch_all($result);
+          	//Si el usuario existe.
+			if(sizeof($fetchArr) == 1) {
+              	$userRs = fetchArr[0];
 				//Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
-				if($this->revisarFuerzaBrutaVAdmon($idUsuario, $planconexion) == true) {
+				if($this->revisarFuerzaBrutaVAdmon($userRs["id"], $planconexion) == true) {
 					//La cuenta está bloqueada
 					//Envia un correo electrónico al usuario que le informa que su cuenta está bloqueada
 					return false;
 				} else {
-					if($contraseniaBd == $contrasenia) { //Revisa si la contraseña en la base de datos coincide con la contraseña que el usuario envió.
+					if($userRs["contrasenia"] == $contrasenia) { //Revisa si la contraseña en la base de datos coincide con la contraseña que el usuario envió.
 						//¡La contraseña es correcta!
 						$navegadorUsr = $_SERVER['HTTP_USER_AGENT']; //Obtén el agente de usuario del usuario
 						$idUsuario = preg_replace("/[^0-9]+/", "", $idUsuario); //protección XSS ya que podemos imprimir este valor
@@ -43,7 +44,7 @@ class inicioSesionVAdmonClass {
 						//La conexión no es correcta
 						//Grabamos este intento en la base de datos
 						$ahora = time();
-						$planconexion->query("INSERT INTO vadmon_planesinicios (idusuario, tiempo) VALUES ('$idUsuario', '$ahora')");
+						pg_query($planconexion,"INSERT INTO vadmon_planesinicios (idusuario, tiempo) VALUES ('$idUsuario', '$ahora')");
 						return false;
 					}
 				}
@@ -59,13 +60,14 @@ class inicioSesionVAdmonClass {
 		$ahora = time();
 		//Todos los intentos de inicio de sesión son contados desde las 2 horas anteriores.
 		$validaIntentos = $ahora - (2 * 60 * 60);
-		if ($stmtVAdmon = $planconexion->prepare("SELECT tiempo FROM vadmon_planesinicios WHERE idusuario = ? AND tiempo > '$validaIntentos'")) {
-			$stmtVAdmon->bind_param('i', $idUsuario);
+      	$sqlStr = "SELECT tiempo FROM vadmon_planesinicios WHERE idusuario = $1 AND tiempo > '$validaIntentos'";
+      	$sqlName = "insertAttemptToLoggingIn";
+		if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
 			//Ejecuta la consulta preparada.
-			$stmtVAdmon->execute();
-			$stmtVAdmon->store_result();
+          	$result = pg_execute($planconexion, $sqlName, array($idUsuario));
+			$fetchArr = pg_fetch_all($result);
 			//Si ha habido más de 5 intentos de inicio de sesión fallidos
-			if($stmtVAdmon->num_rows > 5) {
+			if(sizeof($fetchArr) > 5) {
 				return true;
 			} else {
 				return false;
@@ -80,14 +82,14 @@ class inicioSesionVAdmonClass {
 			$cadenaInicio = $_SESSION['cadenaInicioVAdmon'];
 			$nombreUsr = $_SESSION['nombreUsrVAdmon'];
 			$navegadorUsr = $_SERVER['HTTP_USER_AGENT']; //Obtén la cadena de caractéres del agente de usuario
-			
-			if ($stmtVAdmon = $planconexion->prepare("SELECT contrasenia FROM vadmon_planes WHERE id = ? LIMIT 1")) {
-				$stmtVAdmon->bind_param('i', $idUsuario); //Liga "$idUsuario" a parámetro.
-				$stmtVAdmon->execute(); //Ejecuta la consulta preparada.
-				$stmtVAdmon->store_result();
-				if($stmtVAdmon->num_rows == 1) { //Si el usuario existe
-					$stmtVAdmon->bind_result($contrasenia); //Obtén variables del resultado.
-					$stmtVAdmon->fetch();
+			$sqlStr = "SELECT tiempo FROM vadmon_planesinicios WHERE idusuario = $1 AND tiempo > '$validaIntentos'";
+      		$sqlName = "confirmInitialChain";
+			if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
+				//Ejecuta la consulta preparada.
+				$result = pg_execute($planconexion, $sqlName, array($idUsuario));
+				$fetchArr = pg_fetch_all($result);
+              	//Si el usuario existe
+				if(sizeof($fetchArr) == 1) {
 					$revisarInicio = hash('sha256', $contrasenia.$navegadorUsr);
 					if($revisarInicio == $cadenaInicio) {
 						//¡¡¡¡Conectado!!!!
