@@ -7,6 +7,5 @@ $strCreatePlanesTableSQL .= 'plandisenio BOOLEAN DEFAULT FALSE, planregistro BOO
 $strCreatePlanesTableSQL .= 'servidorusuario VARCHAR(255) NOT NULL, servidorpass VARCHAR(255) NOT NULL, servidorftpdirectorio VARCHAR(255) NOT NULL,';
 $strCreatePlanesTableSQL .= 'servidorftpusuario VARCHAR(255) NOT NULL, servidorftppass VARCHAR(255) NOT NULL, activo BOOLEAN DEFAULT TRUE';
 $strCreatePlanesTableSQL .= ');';
-$strCreatePlanesTableSQLName = 'createPlanes';
 pg_query($planconexion, $strCreatePlanesTableSQL);
 ?>
