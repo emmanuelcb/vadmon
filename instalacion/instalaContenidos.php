@@ -6,9 +6,9 @@ if($_COOKIE['passBase'] <> 'ninguna'){ $passBase = $_COOKIE['passBase']; }else{ 
 $charset = $_COOKIE['charset'];
 $cotejamiento = $_COOKIE['cotejamiento'];
 
-/*$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
+$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
 echo $conexion;
-mysql_select_db($baseDatos, $conexion);
+/*mysql_select_db($baseDatos, $conexion);
 
 mysql_query("CREATE TABLE `vadmon_contenidos` (
   `id` int(11) NOT NULL auto_increment,
