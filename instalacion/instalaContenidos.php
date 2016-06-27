@@ -7,6 +7,7 @@ $charset = $_COOKIE['charset'];
 $cotejamiento = $_COOKIE['cotejamiento'];
 
 $conexion=mysql_connect($servidor, $usuarioBase, $passBase);
+echo $conexion;
 mysql_select_db($baseDatos, $conexion);
 
 mysql_query("CREATE TABLE `vadmon_contenidos` (
