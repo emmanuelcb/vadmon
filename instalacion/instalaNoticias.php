@@ -6,10 +6,11 @@ if($_COOKIE['passBase'] <> 'ninguna'){ $passBase = $_COOKIE['passBase']; }else{ 
 $charset = $_COOKIE['charset'];
 $cotejamiento = $_COOKIE['cotejamiento'];
 
-$conexion=mysql_connect($servidor, $usuarioBase, $passBase);
-mysql_select_db($baseDatos, $conexion);
+$strPgConnection = 'dbname='.$baseDatos.' host='.$servidor.' port=5432 ';	
+$strPgConnection .= 'user='.$usuarioBase.' password='.$passBase.' sslmode=require';
+$conexion = pg_connect($strPgConnection);
 
-mysql_query("CREATE TABLE `vadmon_noticias` (
+pg_query("CREATE TABLE `vadmon_noticias` (
   `id` int(2) NOT NULL auto_increment,
   `titulonoticia` varchar(255) collate ".$cotejamiento." default NULL,
   `textonoticia` text collate ".$cotejamiento.",
