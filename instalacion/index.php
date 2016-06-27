@@ -33,10 +33,27 @@
                         <td width="150"><span class="cNaranja">Contraseña:</span></td><td><input type="text" name="passBase" class="inputNormal"><br /></td>
                     </tr>
                     <tr>
-                        <td width="150"><span class="cNaranja">Charset:</span></td><td><input type="text" name="charset" class="inputNormal"><br /></td>
+                        <td width="150"><span class="cNaranja">Charset:</span></td>
+                        <td>
+                          <select name="charset" class="inputNormal">
+                          	<option value="utf8">utf8</option>
+                          	<option value="latin1">latin1</option>
+                          	<option value="ASCII">ASCII</option>
+                          </select><br />
+                        </td>
                     </tr>
                     <tr>
-                        <td width="150"><span class="cNaranja">Cotejamiento:</span></td><td><input type="text" name="cotejamiento" class="inputNormal"><br /></td>
+                        <td width="150"><span class="cNaranja">Cotejamiento:</span></td>
+                        <td>
+                          <select name="cotejamiento" class="inputNormal">
+                          	<option value="utf8_unicode_ci">utf8_unicode_ci</option>
+                          	<option value="latin1_general_cs">latin1_general_cs</option>
+                          	<option value="ascii_general_ci">ascii_general_ci</option>
+                          	<option value="utf8_bin">utf8_bin</option>
+                          	<option value="latin1_bin">latin1_bin</option>
+                          	<option value="ascii_bin">ascii_bin</option>
+                          </select><br />
+                        </td>
                     </tr>
                 	<tr>
                     	<td></td>
