@@ -7,12 +7,5 @@ $strCreatePlanesTableSQL .= 'plandisenio BOOLEAN DEFAULT FALSE, planregistro BOO
 $strCreatePlanesTableSQL .= 'servidorusuario VARCHAR(255) NOT NULL, servidorpass VARCHAR(255) NOT NULL, servidorftpdirectorio VARCHAR(255) NOT NULL,';
 $strCreatePlanesTableSQL .= 'servidorftpusuario VARCHAR(255) NOT NULL, servidorftppass VARCHAR(255) NOT NULL, activo BOOLEAN DEFAULT TRUE';
 $strCreatePlanesTableSQL .= ');';
-$strCreatePlanesTableSQLName = 'createPlanes';
-echo 'vadmon_planes';
-echo pg_prepare($planconexion, $strCreatePlanesTableSQLName, $strCreatePlanesTableSQL);
-if(pg_prepare($planconexion, $strCreatePlanesTableSQLName, $strCreatePlanesTableSQL))
-{
-  	echo 'i\'m in';
-	$result = pg_execute($planconexion, $strCreatePlanesTableSQLName);
-}
+pg_query($planconexion, $strCreatePlanesTableSQL);
 ?>
