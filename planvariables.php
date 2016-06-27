@@ -4,9 +4,9 @@ $sqlPlanesTable = "SELECT table_name FROM information_schema.tables WHERE table_
 $sqlPlanesName = "isThereExistingPlanesTable";
 if(pg_prepare($planconexion, $sqlPlanesName, $sqlPlanesTable))
 {
-  echo 'I am in';
   $result = pg_execute($planconexion, $sqlPlanesName);
   $fetchArr = pg_fetch_all($result);
+  echo sizeof($fetchArr);
   if(sizeof($fetchArr) == 0) {
     include("acciones/instalacion/vadmon_planes.php");
   }
