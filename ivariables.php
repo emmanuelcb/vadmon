@@ -14,7 +14,7 @@ $dias= array("Sa","Do","Lu","Ma","Mi","Ju","Vi");
 
 // VARIABLES GENERALES
 $mensaje="";
-$fechahoy=date("Y-m-d");      // lee la fcha
+$fechahoy=date("Y-m-d");      // lee la fecha
 $horaactual=date("H:i");
 $diahoy=date("d");
 $meshoy=date("m");
@@ -163,20 +163,24 @@ if($archivoActual <> "index.php")
 		$fetchArr = pg_fetch_all($result);
 		$numeroContenidos = sizeof($fetchArr);
 	}
-
-	if($stmtExisteConfiguracion = $conexion->prepare("SHOW TABLES LIKE 'vadmon_configuracion'")) {
-		$stmtExisteConfiguracion->execute();
-		$stmtExisteConfiguracion->store_result();
-		if($stmtExisteConfiguracion->num_rows == '') {
+           
+    $strConfigurationTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    $strConfigurationTableExistsSQL .= 'WHERE table_schema = \'vadmon_configuracion\'';
+    $strConfigurationTableExistsSQLName = 'isThereExistingConfiguracionTable';
+	if(pg_prepare($conexion, $strConfigurationTableExistsSQLName, $strConfigurationTableExistsSQL)) {
+		$result = pg_execute($conexion, $strConfigurationTableExistsSQLName);
+		$fetchArr = pg_fetch_all($result);
+		if(sizeof($fetchArr) == 0) {
 			include("acciones/instalacion/vadmon_configuracion.php");
 		}
 	}
-	if($stmtConfiguracion = $conexion->prepare("select herramienta, campo1, campo2, activo from vadmon_configuracion where herramienta='limitecontenidos' and activo=1 limit 0,1")){
-		$stmtConfiguracion->execute();
-		$stmtConfiguracion->store_result();
-		$stmtConfiguracion->bind_result($herramienta_rslt, $campo1_rslt, $campo2_rslt, $activo_rslt);
-		while($stmtConfiguracion->fetch()){
-			$limiteContenidos = $campo1_rslt;
+    $strConfiguracionDetailsSQL = 'SELECT herramienta, campo1, campo2, activo FROM vadmon_configuracion ';
+    $strConfiguracionDetailsSQL .= 'WHERE herramient = \'limitecontenidos\' AND activo = TRUE LIMIT0,1';
+    $strConfiguracionDetailsSQLName = 'GetConfiguracionDetails';
+	if(pg_prepare($conexion, $strConfiguracionDetailsSQLName, $strConfiguracionDetailsSQL)){
+		$result = pg_execute($conexion, $strConfiguracionDetailsSQLName);
+		while($row = pg_fetch_array($result)){
+			$limiteContenidos = $row['campo1'];
 		}
 	}
 
