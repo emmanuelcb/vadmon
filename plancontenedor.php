@@ -21,7 +21,11 @@
         <div class="encabezadoSeccion"><span class="tituloSeccion">Registrate</span><br/></div>
         <div class="contenedorRegistros">
         	<form name="registroplan" action="registraplan.php" method="post">
-          		<input type="text" name="empresa" style="width:250px; padding:5px;" />
+          		<span style="font-size:11px; color:#666666;">Nombre Empresa:</span><br/>
+          		<input type="text" name="usuario" style="width:250px; padding:5px;" />
+                <span style="font-size:11px; color:#666666;">Contrase&ntilde;a:</span><br/>
+                <input type="password" name="contrasenia" style="width:250px; padding:5px;" /><br /><br/>
+        		<input type="submit" value="Registrar" />
         	</form>
         </div>
     </td>
