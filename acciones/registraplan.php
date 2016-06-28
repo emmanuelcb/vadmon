@@ -1,4 +1,5 @@
 <?php
+include("../planconexion.php");
 // Creamos usuario
 $strInsertUsuarioPlanSQLName = 'InsertUsuarioPlan';
 $strInsertUsuarioPlanSQL = 'INSERT INTO vadmon_planes (usuario, contrasenia, planusuarios, planpermisos, planarticulos, plannoticias, planencuestas, planpromociones, plandisenio, planregistro, servidor, servidordb, servidorusuario, servidorpass, servidorftpdirectorio, servidorftpusuario, servidorftppass, activo)';
