@@ -66,13 +66,18 @@ if(isset($_GET["idperfil"]))
 							$extension = $claseFunciones->obtenerExtension($img);
 							if($extension=="jpg" || $extension=="png" ||$extension=="jpeg" ||$extension=="gif" ||
 							   $extension=="JPG" || $extension=="PNG" ||$extension=="JPEG" ||$extension=="GIF"){
-								if($img == $ravatar_rslt){ $selectedImagen='selected="selected"';}else{ $selectedImagen=''; }
+								if($img == $usuarios['avatar'])
+                                { 
+                                  	$selectedImagen='selected="selected"';
+                                }else{
+                                  	$selectedImagen='';
+                                }
 								$imagenOption.= '<option '.$selectedImagen.'>'.$img.'</option>';
 							}
 						}
 					}
 					$imagenOption.='</select><br />';
-				$mostrarContenido.='<div id="actualizar"><img src="http://'.$HostDominio.'/recursos/usuarios/'.$avatar_rslt.'" alt="" class="imagenAvatar"/>
+				$mostrarContenido.='<div id="actualizar"><img src="http://'.$HostDominio.'/recursos/usuarios/'.$usuarios['avatar'].'" alt="" class="imagenAvatar"/>
 									</div><br />'.$imagenOption.'<br />';
 				$mostrarContenido.='<span class="textoDescriptivo"><small><b>NOTA:</b> La imagen debe medir 150px x 150px</small></span><br /></td>';
 				$mostrarContenido.='<td valign="top"><table cellpadding="3" cellspacing="0" border="0" width="400">';
@@ -83,35 +88,53 @@ if(isset($_GET["idperfil"]))
 				$mostrarContenido.='<input type="password" name="newpass"  class="inputWidth"/></td></tr>';
 				$mostrarContenido.='<tr><td><h3>Tus detalles personales</h3></td><td></td></tr>';
 				$mostrarContenido.='<tr><td><span class="textoDescriptivo">Nombre:</span><br />';
-				$mostrarContenido.='<input type="text" name="nombre" value="'.$nombre_rslt.'" class="inputWidth"/></td>';
+				$mostrarContenido.='<input type="text" name="nombre" value="'.$usuarios['nombre'].'" class="inputWidth"/></td>';
 				$mostrarContenido.='<td><span class="textoDescriptivo">Email:</span><br />';
-				$mostrarContenido.='<input type="text" name="email" value="'.$email_rslt.'" class="inputWidth"/></td></tr>';
+				$mostrarContenido.='<input type="text" name="email" value="'.$usuarios['email'].'" class="inputWidth"/></td></tr>';
 				$mostrarContenido.='<tr><td><span class="textoDescriptivo">Apellidos:</span><br />';
-				$mostrarContenido.='<input type="text" name="apellidos" value="'.$apellidos_rslt.'" class="inputWidth"/></td>';
+				$mostrarContenido.='<input type="text" name="apellidos" value="'.$usuarios['apellidos'].'" class="inputWidth"/></td>';
 				$mostrarContenido.='<td></td></tr>';
 				$mostrarContenido.='<tr><td><h3>Nivel y Estado de Usuario</h3></td><td></td></tr>';
 				// Traemos las opciones
-				if($stmtNivelesUsuario = $conexion->query("SELECT id, nivelusuario FROM vadmon_permisos ORDER BY id ASC")){
-					if($stmtNivelesUsuario->num_rows>0){
+              	$strUsuariosAccessDetailsSQLName = 'GetUsuariosAccessDetails';
+              	$strUsuariosAccessDetailsSQL = 'SELECT id, nivelusuario FROM vadmon_permisos ORDER BY id ASC';
+				if(pg_prepare($conexion, $strUsuariosAccessDetailsSQLName, $strUsuariosAccessDetailsSQL))
+                {
+                  	$usuariosAccessRs = pg_execute($conexion, $strUsuariosAccessDetailsSQLName);
+                  	$usuariosAccessFetchAll = pg_fetch_all($usuariosAccessRs);
+					if(sizeof($usuariosAccessFetchAll) > 0){
 						$opcionNivel='';
-						$opcionNivel.='<option>'.$nivelusuario_rslt.'</option>';
-						while($obj = $stmtNivelesUsuario->fetch_object()){
-							if($obj->nivelusuario<>$nivelusuario_rslt){
-								if($sobj->nivelusuario<>"maestro"){
-									$opcionNivel.='<option>'.$obj->nivelusuario.'</option>';
+						$opcionNivel.='<option>'.$usuarios['nivelusuario'].'</option>';
+						while($usrAccess = pg_fetch_array($usuariosAccessRs)){
+							if($usrAccess['nivelusuario'] <> $nivelusuario_rslt)
+                            {
+								if($usrAccess['nivelusuario'] <> "maestro")
+                                {
+									$opcionNivel.='<option>'.$usrAccess['nivelusuario'].'</option>';
 								}
 							}
 						}
 					}
 				}
 				$mostrarContenido.='<tr><td><span class="textoDescriptivo">Permisos de:</span><br/ >';
-				if($ppermisos==1){$mostrarContenido.='<select name="">'.$opcionNivel.'</select>';
-				}else if($ppermisos==0){$mostrarContenido.=$nivelusuario_rslt.'<input type="hidden" value="'.$nivelusuario_rslt.'" name="nivelusuario" />';}
+				if($ppermisos==1)
+                {
+                  	$mostrarContenido.='<select name="">'.$opcionNivel.'</select>';
+				}
+              	else if($ppermisos==0)
+                {
+                  	$mostrarContenido.=$usuarios['nivelusuario'].'<input type="hidden" value="'.$usuarios['nivelusuario'].'" name="nivelusuario" />';}
 				$mostrarContenido.='</td>';
 					$selectEstado='';
 					$selectEstado.='<select name="activo">';
-					if($rowA["activo"]==1){$selectEstado.='<option value="1">activo</option><option value="0">inactivo</option>';}
-					else if($rowA["activo"]==0){$selectEstado.='<option value="0">inactivo</option><option value="1">activo</option>';}
+					if($usuarios['activo'] == TRUE)
+                    {
+                      	$selectEstado.='<option value="1">activo</option><option value="0">inactivo</option>';
+                    }
+					else if($rowA["activo"]==0)
+                    {
+                      	$selectEstado.='<option value="0">inactivo</option><option value="1">activo</option>';
+                    }
 					$selectEstado.='</select>';
 				$mostrarContenido.='<td><span class="textoDescriptivo">Estado:</span><br />'.$selectEstado.'</td></tr>';
 				$mostrarContenido.='<tr><td><input type="submit" name="Submit" value="Guardar" class="botonAzul bordesRedondos" style="border:none;"/></td>';
@@ -124,8 +147,9 @@ if(isset($_GET["idperfil"]))
 	if($_GET["idperfil"]=="lista")
 	{
 		$nombreUsuario = $_COOKIE['loggedin'];
-		if($stmtListaUsuarios = $conexion->prepare("SELECT id, nick, password, nombre, apellidos, email, avatar, nivelusuario FROM vadmon_usuarios
-																		WHERE nick<>'".$nombreUsuario."' AND activo=1 ORDER BY id DESC")){
+      	$strUsuarioDetailSQLName = '';
+      	$strUsuarioDetailSQL = 'SELECT id, nick, password, nombre, apellidos, email, avatar, nivelusuario FROM vadmon_usuarios WHERE nick<>\''.$nombreUsuario.'\' AND activo = TRUE ORDER BY id DESC';
+		if(pg_prepare($conexion, $strUsuarioDetailSQLName, $strUsuarioDetailSQL)){
 			$stmtListaUsuarios->execute();
 			$stmtListaUsuarios->store_result();
 			$stmtListaUsuarios->bind_result($id_rslt, $nick_rslt, $password_rslt, $nombre_rslt, $apellidos_rslt, $email_rslt, $avatar_rslt, $nivelusuario_rslt);
