@@ -155,11 +155,11 @@ if($archivoActual <> "index.php")
 			include("acciones/instalacion/vadmon_contenidos.php");
 		}
 	}
-    $strContenidosDetailsSQL = 'SELECT id, menucontenido, subcontenido, activo ';
-    $strContenidosDetailsSQL .= 'FROM vadmon_contenidos WHERE subcontenido=0 and activo=1';
-    $strContenidosDetailsSQLName = 'GetContenidosDetails';
-	if(pg_prepare($conexion, $strContenidosDetailsSQLName, $strContenidosDetailsSQL)){
-		$result = pg_execute($conexion, $strContenidosDetailsSQLName);
+    $strTotalContenidosSQL = 'SELECT id, menucontenido, subcontenido, activo ';
+    $strTotalContenidosSQL .= 'FROM vadmon_contenidos WHERE subcontenido=0 and activo=1';
+    $strTotalContenidosSQLName = 'GetTotalContenidos';
+	if(pg_prepare($conexion, $strTotalContenidosSQLName, $strTotalContenidosSQL)){
+		$result = pg_execute($conexion, $strTotalContenidosSQLName);
 		$fetchArr = pg_fetch_all($result);
 		$numeroContenidos = sizeof($fetchArr);
 	}
@@ -186,29 +186,28 @@ if($archivoActual <> "index.php")
 
 	/* LEE SUBCONTENIDOS */
 	$opcionSubcontenidos="";
-	if($stmtExisteContenidos = $conexion->prepare("SHOW TABLES LIKE 'vadmon_contenidos'")) {
-		$stmtExisteContenidos->execute();
-		$stmtExisteContenidos->store_result();
-		if($stmtExisteContenidos->num_rows == '') {
-			include("acciones/instalacion/vadmon_contenidos.php");
-		}
-	}
-	if($stmtOpcionSubcontenidosA = $conexion->prepare("SELECT id, menucontenido FROM vadmon_contenidos WHERE activo=1 AND subcontenido=0 ORDER BY ordencontenido")){
-		$stmtOpcionSubcontenidosA->execute();
-		$stmtOpcionSubcontenidosA->store_result();
-		$stmtOpcionSubcontenidosA->bind_result($id_rsltA, $menucontenido_rsltA);
-		if($stmtOpcionSubcontenidosA->num_rows == ""){
+    $strContenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = 0 ORDER BY ordencontenido';
+    $strContenidosDetailsSQLName = 'GetContenidosDetails';
+	if(pg_prepare($conexion, $strContenidosDetailsSQLName, $strContenidosDetailsSQL)){
+		$contenidos = pg_execute($conexion, $strContenidosDetailsSQLName);
+      	$fetchArr = pg_fetch_all($contenidos);
+		if(sizeof($fetchArr) > 0){
 			$opcionSubcontenidos.='<select name="subcontenido" style="width:210px;">';
 			if($numeroContenidos < $limiteContenidos){
 				$opcionSubcontenidos.='<option value="0">ninguna</option>';
 			}
 			//CONTENIDOS PRINCIPALES
-			while($stmtOpcionSubcontenidos->fetch()){
+			while($contenido = pg_fetch_array($contenidos))
+            {
 				$opcionSubcontenidos.='<option value="'.$rowA["id"].'">'.$rowA["menucontenido"].'</option>';
-				if($stmtOpcionSubcontenidosB = $conexion->query("SELECT id, menucontenido FROM vadmon_contenidos WHERE activo=1 AND subcontenido=".$id_rsltA." ORDER BY ordencontenido")){
+              	$strSubcontenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = \''.$contenido['id'].'\' ORDER BY ordercontenido';
+              	$strSubcontenidosDetailsSQLName = 'GetSubcontenidosDetails';
+				if(pg_prepare($conexion, $strSubcontenidosDetailsSQLName, $strSubcontenidosDetailsSQL))
+                {
+                  	$subcontenidos = pg_execute($conexion, $strSubcontenidosDetailsSQLName);
 					//SUBCONTENIDOS DE CONTENIDO
-					while($objB = $stmtOpcionSubcontenidosB->fetch_object()){
-						$opcionSubcontenidos.='<option value="'.$objB->id.'">&nbsp;&nbsp;&nbsp;'.$objB->menucontenido.'</option>';
+					while($subcontenido = pg_fetch_array($subcontenidos)){
+						$opcionSubcontenidos.='<option value="'.$subcontenido['id'].'">&nbsp;&nbsp;&nbsp;'.$subcontenido['menucontenido'].'</option>';
 					}
 				}
 			}
