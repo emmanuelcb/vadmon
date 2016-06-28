@@ -110,35 +110,36 @@ if($archivoActual <> "index.php")
 
 	/*REVISO PERMISOS */
 	if(isset($_COOKIE['nivelUsuario'])){
-      	$str
-		if($stmtExistePermisos = $conexion->prepare("SHOW TABLES LIKE 'vadmon_permisos'")) {
-			$stmtExistePermisos->execute();
-			$stmtExistePermisos->store_result();
-			if($stmtExistePermisos->num_rows == '') {
+      	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    	$strPermisosTableExistsSQL .= "WHERE table_schema = 'vadmon_permisos'";
+      	$strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
+		if(pg_prepare($conexion, $strPermisosTableExistsSQLName, $strPermisosTableExistsSQL)) {
+			$result = pg_execute($conexion, $strPermisosTableExistsSQLName);
+          	$fetchArr = pg_fetch_all($result);
+			if(sizeof($fetchArr) == 0) {
 				include("acciones/instalacion/vadmon_permisos.php");
 			}
 		}
-		if($stmtPermisos = $conexion->prepare("SELECT contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar FROM vadmon_permisos WHERE nivelusuario = ?")){
-			$stmtPermisos->bind_param("s", $_COOKIE['nivelUsuario']);
-			$stmtPermisos->execute();
-			$stmtPermisos->store_result();
-			$stmtPermisos->bind_result($contenidos_rslt, $noticias_rslt, $articulos_rslt, $promociones_rslt, $banners_rslt, $usuarios_rslt, $configuracion_rslt, $diseno_rslt, $encuestas_rslt, $basesdedatos_rslt, $permisos_rslt, $papelera_rslt, $editar_rslt, $crear_rslt, $eliminar_rslt);
-			while($stmtPermisos->fetch()){
-				$pcontenidos=$contenidos_rslt;
-				$pnoticias=$noticias_rslt;
-				$particulos=$articulos_rslt;
-				$ppromociones=$promociones_rslt;
-				$pbanners=$banners_rslt;
-				$pusuarios=$usuarios_rslt;
-				$pconfiguracion=$configuracion_rslt;
-				$pdiseno=$diseno_rslt;
-				$pencuestas=$encuestas_rslt;
-				$pbasesdedatos=$basesdedatos_rslt;
-				$ppermisos=$permisos_rslt;
-				$ppapelera=$papelera_rslt;
-				$peditar=$editar_rslt;
-				$pcrear=$crear_rslt;
-				$peliminar=$eliminar_rslt;
+      	$strPermisosDetailsSQL = 'SELECT contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar FROM vadmon_permisos WHERE nivelusuario = $1';
+      	$strPermisosDetailsSQLName = 'getPermisosDetails';
+		if(pg_prepare($conexion, $strPermisosDetailsSQLName, $strPermisosDetailsSQL)){
+			$result = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
+			while($row = pg_fetch_array($result)){
+				$pcontenidos	= $row['contenidos'];
+				$pnoticias		= $row['noticias'];
+				$particulos		= $row['articulos'];
+				$ppromociones	= $row['promociones'];
+				$pbanners		= $row['banners'];
+				$pusuarios		= $row['usuarios'];
+				$pconfiguracion	= $row['configuracion'];
+				$pdiseno		= $row['diseno'];
+				$pencuestas		= $row['encuestas'];
+				$pbasesdedatos	= $row['basesdedatos'];
+				$ppermisos		= $row['permisos'];
+				$ppapelera		= $row['papelera'];
+				$peditar		= $row['editar'];
+				$pcrear			= $row['crear'];
+				$peliminar		= $row['eliminar'];
 			}
 		}
 	}
