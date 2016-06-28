@@ -5,7 +5,8 @@ $result = pg_execute($conexion, $strCreateVersionTableSQL);
 // Colocamos la version actual
 $strInsertVersionSQL = 'INSERT INTO vadmon_version (version) VALUES ($1)';
 $strInsertVersionSQLName = 'insertVersion';
-if(pg_prepare($conexion, $strInsertVersionSQLName, $strInsertVersionSQL)){
+if(pg_prepare($conexion, $strInsertVersionSQLName, $strInsertVersionSQL))
+{
   	pg_execute($conexion, $strCreateVersionTableSQLName, array($version_vadmon));
 }
 ?>
