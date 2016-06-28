@@ -18,7 +18,7 @@
       </form>
     </td>
     <td class="contenedor">
-	  Bienvenido
+        <div class="encabezadoSeccion"><span class="tituloSeccion">Registrate</span><br/></div>
     </td>
   </tr>
 </table>
