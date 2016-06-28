@@ -155,10 +155,13 @@ if($archivoActual <> "index.php")
 			include("acciones/instalacion/vadmon_contenidos.php");
 		}
 	}
-	if($stmtContenidos = $conexion->prepare("SELECT id, menucontenido, subcontenido, activo FROM vadmon_contenidos WHERE subcontenido=0 and activo=1")){
-		$stmtContenidos->execute();
-		$stmtContenidos->store_result();
-		$numeroContenidos = $stmtContenidos->num_rows;
+    $strContenidosDetailsSQL = 'SELECT id, menucontenido, subcontenido, activo ';
+    $strContenidosDetailsSQL .= 'FROM vadmon_contenidos WHERE subcontenido=0 and activo=1';
+    $strContenidosDetailsSQLName = 'GetContenidosDetails';
+	if(pg_prepare($conexion, $strContenidosDetailsSQLName, $strContenidosDetailsSQL)){
+		$result = pg_execute($conexion, $strContenidosDetailsSQLName);
+		$fetchArr = pg_fetch_all($result);
+		$numeroContenidos = sizeof($fetchArr);
 	}
 
 	if($stmtExisteConfiguracion = $conexion->prepare("SHOW TABLES LIKE 'vadmon_configuracion'")) {
