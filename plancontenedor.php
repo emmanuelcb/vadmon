@@ -19,6 +19,11 @@
     </td>
     <td class="contenedor">
         <div class="encabezadoSeccion"><span class="tituloSeccion">Registrate</span><br/></div>
+        <div class="contenedorRegistros">
+        	<form name="registroplan" action="registraplan.php" method="post">
+          		<input type="text" name="empresa" style="width:250px; padding:5px;" />
+        	</form>
+        </div>
     </td>
   </tr>
 </table>
