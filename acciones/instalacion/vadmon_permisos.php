@@ -5,7 +5,7 @@ $strCreatePermisosTableSQL .= 'id SERIAL PRIMARY KEY, nivelusuario VARCHAR(255) 
 $strCreatePermisosTableSQL .= 'articulos BOOLEAN DEFAULT FALSE, promociones BOOLEAN DEFAULT FALSE, banners BOOLEAN DEFAULT FALSE, usuarios BOOLEAN DEFAULT FALSE,';
 $strCreatePermisosTableSQL .= 'configuracion BOOLEAN DEFAULT FALSE, diseno BOOLEAN DEFAULT FALSE, encuestas BOOLEAN DEFAULT FALSE, basededatos BOOLEAN DEFAULT FALSE,';
 $strCreatePermisosTableSQL .= 'permisos BOOLEAN DEFAULT FALSE, papelera BOOLEAN DEFAULT FALSE, editar BOOLEAN DEFAULT FALSE, crear BOOLEAN DEFAULT FALSE, eliminar BOOLEAN DEFAULT FALSE);';
-$result = pg_execute($conexion, $strCreatePermisosTableSQL);
+pg_query($conexion, $strCreatePermisosTableSQL);
   
 // Creamos limite de contenidos principales
 $strInsertBasicPermisosSQL = 'INSERT INTO vadmon_permisos (';
