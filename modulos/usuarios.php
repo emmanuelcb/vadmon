@@ -12,19 +12,21 @@ if(isset($_GET["idperfil"]))
 		{
 			header("location: contenido.php?idperfil=".$_COOKIE['idUsuario']);
 		}
-		
-		if($stmtExisteUsuarios = $conexion->prepare("SHOW TABLES LIKE 'vadmon_usuarios'")) {
-			$stmtExisteUsuarios->execute();
-			$stmtExisteUsuarios->store_result();
-			if($stmtExisteUsuarios->num_rows == '') {
+		// REVISO Usuarios
+      	$strUsuariosTableExistsSQLName = 'isThereExistingUsuariosTable';
+      	$strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables WHERE table_schema = \'vadmon_usuarios\'';
+		if(pg_prepare($conexion, $strUsuariosTableExistsSQLName, $strUsuariosTableExistsSQL)) {
+			$result = pg_execute($conexion, $strUsuariosTableExistsSQLName);
+			$fetchArr = pg_fetch_all($result);
+			if(sizeof($fetchArr) == 0) {
 				include("acciones/instalacion/vadmon_usuarios.php");
 			}
 		}
-		if($stmtUsuarios = $conexion->prepare("SELECT id, avatar, nick, nivelusuario, nombre, email, apellidos FROM vadmon_usuarios WHERE id=".$_GET["idperfil"])){
-			$stmtUsuarios->execute();
-			$stmtUsuarios->store_result();
-			$stmtUsuarios->bind_result($id_rslt, $avatar_rslt, $nick_rslt, $nivelusuario_rslt, $nombre_rslt, $email_rslt, $apellidos_rslt);
-			while($stmtUsuarios->fetch()){
+      	$strUsuariosDetailsSQLName = 'GetUsuariosDetails';
+      	$strUsuariosDetailsSQL = 'SELECT id, avatar, nick, nivelusuario, nombre, email, apellidos FROM vadmon_usuarios WHERE id='.$_GET['idperfil'];
+		if(pg_prepare($conexion, $strUsuariosDetailsSQLName, $strUsuariosDetailsSQL)){
+			$result = pg_execute($conexion, $strUsuariosDetailsSQLName);
+			while($usuarios = pg_fetch_array($result)){
 				$javascriptExtra.='
 				function recargar() {
 					var imagenSrc = document.perfilUsuario.Avatar.value;
@@ -40,12 +42,12 @@ if(isset($_GET["idperfil"]))
 				$mostrarContenido.='<span class="tituloSeccion">Tu Perfil</span><br/></div>';
 				$mostrarContenido.='<div class="contenedorRegistros">';
 				$mostrarContenido.='<div id="moduloLectura"><table cellpadding="10" cellspacing="0" border="0"><tr>';
-				$mostrarContenido.='<td width="150"><img src="http://'.$HostDominio.'/recursos/usuarios/'.$avatar_rslt.'" alt="avatar" width="150" height="150"/></td>';
+				$mostrarContenido.='<td width="150"><img src="http://'.$HostDominio.'/recursos/usuarios/'.$usuarios['avatar'].'" alt="avatar" width="150" height="150"/></td>';
 				$mostrarContenido.='<td style="font-size:14px; line-height:18px;" valign="top">';
-				$mostrarContenido.='<span style="font-size:24px;">'.$nick_rslt.'</span><br />';
-				$mostrarContenido.='<span style="font-size:14px; color:#999999;">'.$nivelusuario_rslt.'</span><br /><br/>';
-				$mostrarContenido.='<p style="font-size:12px; color:#999999;">'.$nombre_rslt.' '.$apellidos_rslt.'<br />';
-				$mostrarContenido.=$email_rslt.'<br />';
+				$mostrarContenido.='<span style="font-size:24px;">'.$usuarios['nick'].'</span><br />';
+				$mostrarContenido.='<span style="font-size:14px; color:#999999;">'.$usuarios['nivelusuario'].'</span><br /><br/>';
+				$mostrarContenido.='<p style="font-size:12px; color:#999999;">'.$usuarios['nombre'].' '.$usuarios['apellidos'].'<br />';
+				$mostrarContenido.=$usuarios['email'].'<br />';
 				$mostrarContenido.='<br/><a onclick="muestraCampos();" title="agregar" class="btnNuevo">Modifica tu Perfil</a></td>';
 				$mostrarContenido.='</tr></table></div>';
 				$mostrarContenido.='<div id="moduloOculto" style="display:none;"><form name="perfilUsuario" action="acciones/update.php" method="post">';
