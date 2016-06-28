@@ -145,10 +145,13 @@ if($archivoActual <> "index.php")
 	}
 
 	/* REVISO NUMERO DE CONTENIDOS Y EL LIMITE */
-	if($stmtExisteContenidos = $conexion->prepare("SHOW TABLES LIKE 'vadmon_contenidos'")) {
-		$stmtExisteContenidos->execute();
-		$stmtExisteContenidos->store_result();
-		if($stmtExisteContenidos->num_rows == '') {
+    $strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    $strContenidosTableExistsSQL .= 'WHERE table_schema = \'vadmon_contenidos\'';
+    $strContenidosTableExistsSQLName = 'isThereExistingContenidosTable';
+	if(pg_prepare($conexion, $strContenidosTableExistsSQLName, $strContenidosTableExistsSQL)) {
+		$result = pg_execute($conexion, $strContenidosTableExistsSQLName);
+		$fetchArr = pg_fetch_all($result);
+		if(sizeof($fetchArr) == 0) {
 			include("acciones/instalacion/vadmon_contenidos.php");
 		}
 	}
