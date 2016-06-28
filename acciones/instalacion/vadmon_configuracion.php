@@ -1,16 +1,14 @@
 <?php
-mysql_query("CREATE TABLE `vadmon_configuracion` ( 
-	`id` int(11) NOT NULL auto_increment,
-	`herramienta` varchar(255) collate latin1_spanish_ci NOT NULL, 
-	`campo1` varchar(255) collate latin1_spanish_ci NOT NULL, 
-	`campo2` varchar(255) collate latin1_spanish_ci NOT NULL,
-	`creador` varchar(255) collate latin1_spanish_ci default NULL,
-	`fechacreacion` date default NULL,
-	`modificador` varchar(255) collate latin1_spanish_ci default NULL,
-	`fechamodificacion` date default NULL,
-	`fijo` int(11) default '0',
-	`activo` int(11) default 1, PRIMARY KEY (`id`) ) 
-	ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci ") ;
+$strCreateConfiguracionTableSQL = 'CREATE TABLE vadmon_configuracion (';
+$strCreateConfiguracionTableSQL .= 'id SERIAL PRIMARY KEY, herramienta VARCHAR(255) NOT NULL, campo1 VARCHAR(255) NOT NULL, campo2 VARCHAR(255) NOT NULL,';
+$strCreateConfiguracionTableSQL .= 'creador VARCHAR(255) DEFAULT NULL, fechacreacion DATE DEFAULT CURRENT_DATE, modificador VARCHAR(255) DEFAULT NULL, fechamodificacion DATE DEFAULT CURRENT_DATE, fijo BOOLEAN DEFAULT FALSE, activo BOOLEAN DEFAULT TRUE);';
+$strCreateConfiguracionTableSQL .= '';
+$strCreateConfiguracionTableSQL .= '';
+$strCreateConfiguracionTableSQL .= '';
+$strCreateConfiguracionTableSQL .= '';
+$strCreateConfiguracionTableSQL .= '';
+pg_query($conexion, $strCreateConfiguracionTableSQL);
+
 // Creamos limite de contenidos principales
 mysql_query("insert into vadmon_configuracion 
 (id, herramienta, campo1, campo2) values 
