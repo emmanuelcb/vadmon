@@ -20,7 +20,7 @@
     <td class="contenedor">
         <div class="encabezadoSeccion"><span class="tituloSeccion">Registrate</span><br/></div>
         <div class="contenedorRegistros">
-        	<form name="registroplan" action="registraplan.php" method="post">
+        	<form name="registroplan" action="acciones/registraplan.php" method="post">
           		<span style="font-size:11px; color:#666666;">Nombre Empresa:</span><br/>
           		<input type="text" name="usuario" style="width:250px; padding:5px;" /><br/><br/>
                 <span style="font-size:11px; color:#666666;">Contrase&ntilde;a:</span><br/>
