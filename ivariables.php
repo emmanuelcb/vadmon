@@ -66,22 +66,22 @@ if($archivoActual <> "index.php")
 {
 	/*REVISO SI EL SISTEMA ESTA ACTUALIZADO */
 	$versionCliente = '';
-  	$strVersionTableSQL = 'SHOW TABLES LIKE vadmon_version';
-  	$strVersionTableSQLName = 'isThereExistingVersionTable'
-	if(pg_prepare($planconexion, $strVersionTableSQLName, $strVersionTableSQL)) {
+  	$strVersionTableExistsSQL = "SELECT table_name FROM information_schema.tables ';
+    $strVersionTableExistsSQL .= "WHERE table_schema = 'vadmon_version'";
+  	$strVersionTableExistsSQLName = 'isThereExistingVersionTable'
+	if(pg_prepare($planconexion, $strVersionTableExistsSQLName, $strVersionTableExistsSQL)) {
       	$result = pg_execute($conexion, $strVersionTableSQLName);
   		$fetchArr = pg_fetch_all($result);
 		if(sizeof($fecthArray) == 0) {
 			include("acciones/instalacion/vadmon_version.php");
 		}
 	}
-	if($stmtVersion = $conexion->prepare("SELECT version FROM vadmon_version LIMIT 1")){
-		$stmtVersion->bind_param("s", $stmtVersionCampos);
-		$stmtVersion->execute();
-		$stmtVersion->store_result();
-		$stmtVersion->bind_result($version_rslt);
-		while($stmtVersion->fetch()){
-			$versionCliente = $version_rslt;
+  	$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
+    $strVersionDetailsSQLName = 'GetVersionDetails';
+	if(pg_prepare($conexion, $strVersionDetailsSQLName, $strVersionDetailsSQL)){
+		$result = pg_execute($conexion, $strVersionDetailsSQLName);
+		while($row = pg_fetch_array($result)){
+			$versionCliente = $row['version'];
 		}
 		if(!isset($_GET["version"])){
 			if($versionCliente < $version_vadmon){
@@ -93,22 +93,24 @@ if($archivoActual <> "index.php")
 
 	/* TRAIGO LOS DATOS DEL USUARIO */
 	if(isset($_COOKIE['nivelUsuario'])){
-		if($stmtUsuario = $conexion->prepare("SELECT nombre, apellidos, avatar, nivelusuario FROM vadmon_usuarios WHERE id = ?")){
-			$stmtUsuario->bind_param("i", $_COOKIE["idUsuario"]);
-			$stmtUsuario->execute();
-			$stmtUsuario->store_result();
-			$stmtUsuario->bind_result($nombre_rslt, $apellidos_rslt, $avatar__rslt, $nivelusuario_rslt);
-			while($stmtUsuario->fetch()){
-				$usuarionombre=$nombre_rslt;
-				$usuarioapellidos=$apellidos_rslt;
-				$usuarioavatar=$avatar__rslt;
-				$usuarionivel=$nivelusuario_rslt;
+      	$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
+      	$strUserDetailsSQL .= 'FROM vadmon_usuarios WHERE id = $1';
+      	$strUserDetailsSQLName = 'GetUserDetails';
+		if(pg_prepare($conexion, $strUserDetailsSQLName, $strUserDetailsSQL){
+			$result = pg_execute($conexion, $strUserDetailsSQLName, array($_COOKIE["idUsuario"]));
+			$fetchArr = pg_fetch_all($result);
+			while($row = pg_fetch_array($result)){
+				$usuarionombre 		= $row['nombre'];
+				$usuarioapellidos 	= $row['apellidos'];
+				$usuarioavatar 		= $row['avatar'];
+				$usuarionivel 		= $row['nivelusuario'];
 			}
 		}
 	}
 
 	/*REVISO PERMISOS */
 	if(isset($_COOKIE['nivelUsuario'])){
+      	$str
 		if($stmtExistePermisos = $conexion->prepare("SHOW TABLES LIKE 'vadmon_permisos'")) {
 			$stmtExistePermisos->execute();
 			$stmtExistePermisos->store_result();
