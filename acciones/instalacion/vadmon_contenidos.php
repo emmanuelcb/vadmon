@@ -1,22 +1,10 @@
 <?php
-mysql_query("CREATE TABLE `vadmon_contenidos` (
-  `id` int(11) NOT NULL auto_increment,
-  `subcontenido` varchar(255) collate latin1_spanish_ci default '0',
-  `menucontenido` varchar(255) collate latin1_spanish_ci default NULL,
-  `ordencontenido` int(11) default '0',
-  `titulocontenido` varchar(255) collate latin1_spanish_ci default NULL,
-  `textocontenido` text collate latin1_spanish_ci,
-  `imagen1contenido` varchar(255) collate latin1_spanish_ci default NULL,
-  `imagen2contenido` varchar(255) collate latin1_spanish_ci default NULL,
-  `imagen3contenido` varchar(255) collate latin1_spanish_ci default NULL,
-  `creador` varchar(255) collate latin1_spanish_ci default NULL,
-  `fechacreacion` date default NULL,
-  `modificador` varchar(255) collate latin1_spanish_ci default NULL,
-  `fechamodificacion` date default NULL,
-  `keywordscontenido` varchar(255) collate latin1_spanish_ci default NULL,
-  `descripcioncontenido` text collate latin1_spanish_ci,
-  `fijo` int(11) default '0',
-  `activo` int(11) default '1',
-   PRIMARY KEY (`id`)) 
-  ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci ") ;
+// Creamos la tabla
+$strCreateContenidosTable = 'CREATE TABLE vadmon_contenidos (';
+$strCreateContenidosTable .= 'id SERIAL PRIMARY KEY, subcontenido VARCHAR(255) DEFAULT 0, menucontenido VARCHAR(255) DEFAULT NULL, ordencontenido INTEGER DEFAULT 0,';
+$strCreateContenidosTable .= 'titulocontenido VARCHAR(255) DEFAULT NULL, textocontenido TEXT, imagen1contenido VARCHAR(255) DEFAULT NULL,';
+$strCreateContenidosTable .= 'imagen2contenido VARCHAR(255) DEFAULT NULL, image3contenido VARCHAR(255) DEFAULT NULL, creador VARCHAR(255) DEFAULT NULL,';
+$strCreateContenidosTable .= 'fechacreacion DATE DEFAULT CURRENT_DATE, modificador VARCHAR(255) DEFAULT NULL, fechamodificacion DATE DEFAULT CURRENT_DATE,';
+$strCreateContenidosTable .= 'keywordscontenido VARCHAR(255) DEFAULT NULL, descripcioncontenido TEXT, fijo BOOLEAN DEFAULT FALSE, activo BOOLEAN DEFAULT FALSE);';
+pg_query($conexion, $strCreateContenidosTable);
 ?>
