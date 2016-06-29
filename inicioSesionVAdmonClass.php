@@ -24,6 +24,7 @@ class inicioSesionVAdmonClass {
           	//Si el usuario existe.
 			if(sizeof($fetchArr) == 1) {
               	$userRs = fetchArr[0];
+              	echo $userRs;
 				//Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
 				if($this->revisarFuerzaBrutaVAdmon($userRs["id"], $planconexion) == true) {
 					//La cuenta está bloqueada
