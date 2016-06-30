@@ -20,14 +20,15 @@ class inicioSesionVAdmonClass {
 		if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
 			//$contrasenia = hash('sha256', $contrasenia);
           	$result = pg_execute($planconexion, $sqlName, array($usuario));
-          	echo $result;
+          	echo $result.'<br/>';
           	$fetchArr = pg_fetch_all($result);
           	//Si el usuario existe.
 			if(sizeof($fetchArr) == 1) {
               	while($rowRecord = pg_fetch_array($result)){
-                	echo $rowRecord['id'].' '.$rowRecord['usuario'].' '.$rowRecord['contrasenia'];
+                	echo $rowRecord['id'].' '.$rowRecord['usuario'].' '.$rowRecord['contrasenia'].'<br/>';
                 }
               	$userRs = fetchArr[0];
+              	echo $userRs['id'].' '.$userRs['usuario'].' '.$userRs['contrasenia'].'<br/>';
 				//Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
 				if($this->revisarFuerzaBrutaVAdmon($userRs["id"], $planconexion) == true) {
 					//La cuenta está bloqueada
