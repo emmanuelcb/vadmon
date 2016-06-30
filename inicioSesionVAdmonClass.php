@@ -33,11 +33,11 @@ class inicioSesionVAdmonClass {
                         if($userRs["contrasenia"] == $contrasenia) { //Revisa si la contraseña en la base de datos coincide con la contraseña que el usuario envió.
                             //¡La contraseña es correcta!
                             $navegadorUsr = $_SERVER['HTTP_USER_AGENT']; //Obtén el agente de usuario del usuario
-                            $idUsuario = preg_replace("/[^0-9]+/", "", $idUsuario); //protección XSS ya que podemos imprimir este valor
+                            $idUsuario = preg_replace("/[^0-9]+/", "", $userRs["id"]); //protección XSS ya que podemos imprimir este valor
                             $_SESSION['idUsuarioVAdmon'] = $idUsuario;
-                            $nombreUsr = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $nombreUsr); //protección XSS ya que podemos imprimir este valor
-                            $_SESSION['nombreUsrVAdmon'] = $nombreUsuario;
-                            $_SESSION['cadenaInicioVAdmon'] = hash('sha256', $contrasenia.$navegadorUsr);
+                            $nombreUsr = preg_replace("/[^a-zA-Z0-9_\-]+/", "",  $userRs["usuario"]); //protección XSS ya que podemos imprimir este valor
+                            $_SESSION['nombreUsrVAdmon'] = $nombreUsr;
+                            $_SESSION['cadenaInicioVAdmon'] = hash('sha256',  $userRs["contrasenia"].$navegadorUsr);
                             //Inicio de sesión exitosa
                             return true; 
                         } else {
@@ -83,7 +83,7 @@ class inicioSesionVAdmonClass {
 			$cadenaInicio = $_SESSION['cadenaInicioVAdmon'];
 			$nombreUsr = $_SESSION['nombreUsrVAdmon'];
 			$navegadorUsr = $_SERVER['HTTP_USER_AGENT'];
-          	echo $idUsuario.' - '.$cadenaInicio.' - '.$nombreUsr.' - '.$navegadorUsr.'<br/>';
+          	echo $idUsuario.' - '.$cadenaInicio.' '.$nombreUsr.' '.$navegadorUsr.'<br/>';
           	//Obtén la cadena de caractéres del agente de usuario
 			$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE usuario = $1 LIMIT 1";
       		$sqlName = "confirmInitialChain";
