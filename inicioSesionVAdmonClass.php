@@ -20,37 +20,35 @@ class inicioSesionVAdmonClass {
 		if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
 			//$contrasenia = hash('sha256', $contrasenia);
           	$result = pg_execute($planconexion, $sqlName, array($usuario));
-          	echo $result.'<br/>';
           	$fetchArr = pg_fetch_all($result);
           	//Si el usuario existe.
-			if(sizeof($fetchArr) == 1) {
-              	$rowRecord = pg_fetch_array($result);
-              	$userRs = rowRecord[0];
-              	echo $userRs['id'].' '.$userRs['usuario'].' '.$userRs['contrasenia'].'<br/>';
-				//Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
-				if($this->revisarFuerzaBrutaVAdmon($userRs["id"], $planconexion) == true) {
-					//La cuenta está bloqueada
-					//Envia un correo electrónico al usuario que le informa que su cuenta está bloqueada
-					return false;
-				} else {
-					if($userRs["contrasenia"] == $contrasenia) { //Revisa si la contraseña en la base de datos coincide con la contraseña que el usuario envió.
-						//¡La contraseña es correcta!
-						$navegadorUsr = $_SERVER['HTTP_USER_AGENT']; //Obtén el agente de usuario del usuario
-						$idUsuario = preg_replace("/[^0-9]+/", "", $idUsuario); //protección XSS ya que podemos imprimir este valor
-						$_SESSION['idUsuarioVAdmon'] = $idUsuario;
-						$nombreUsr = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $nombreUsr); //protección XSS ya que podemos imprimir este valor
-						$_SESSION['nombreUsrVAdmon'] = $nombreUsuario;
-						$_SESSION['cadenaInicioVAdmon'] = hash('sha256', $contrasenia.$navegadorUsr);
-						//Inicio de sesión exitosa
-						return true; 
-					} else {
-						//La conexión no es correcta
-						//Grabamos este intento en la base de datos
-						$ahora = time();
-						pg_query($planconexion,"INSERT INTO vadmon_planesinicios (idusuario, tiempo) VALUES ('$idUsuario', '$ahora')");
-						return false;
-					}
-				}
+			if(sizeof($fetchArr) == 1){
+              	while($userRs = pg_fetch_array($result)){
+                    //Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
+                    if($this->revisarFuerzaBrutaVAdmon($userRs["id"], $planconexion) == true) {
+                        //La cuenta está bloqueada
+                        //Envia un correo electrónico al usuario que le informa que su cuenta está bloqueada
+                        return false;
+                    } else {
+                        if($userRs["contrasenia"] == $contrasenia) { //Revisa si la contraseña en la base de datos coincide con la contraseña que el usuario envió.
+                            //¡La contraseña es correcta!
+                            $navegadorUsr = $_SERVER['HTTP_USER_AGENT']; //Obtén el agente de usuario del usuario
+                            $idUsuario = preg_replace("/[^0-9]+/", "", $idUsuario); //protección XSS ya que podemos imprimir este valor
+                            $_SESSION['idUsuarioVAdmon'] = $idUsuario;
+                            $nombreUsr = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $nombreUsr); //protección XSS ya que podemos imprimir este valor
+                            $_SESSION['nombreUsrVAdmon'] = $nombreUsuario;
+                            $_SESSION['cadenaInicioVAdmon'] = hash('sha256', $contrasenia.$navegadorUsr);
+                            //Inicio de sesión exitosa
+                            return true; 
+                        } else {
+                            //La conexión no es correcta
+                            //Grabamos este intento en la base de datos
+                            $ahora = time();
+                            pg_query($planconexion,"INSERT INTO vadmon_planesinicios (idusuario, tiempo) VALUES ('$idUsuario', '$ahora')");
+                            return false;
+                        }
+                    }
+                }
 			} else {
 				//No existe el usuario.
 				return false;
