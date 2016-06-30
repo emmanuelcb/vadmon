@@ -82,8 +82,9 @@ class inicioSesionVAdmonClass {
 			$idUsuario = $_SESSION['idUsuarioVAdmon'];
 			$cadenaInicio = $_SESSION['cadenaInicioVAdmon'];
 			$nombreUsr = $_SESSION['nombreUsrVAdmon'];
-			$navegadorUsr = $_SERVER['HTTP_USER_AGENT']; //Obtén la cadena de caractéres del agente de usuario
-			$sqlStr = "SELECT tiempo FROM vadmon_planesinicios WHERE idusuario = $1 AND tiempo > '$validaIntentos'";
+			$navegadorUsr = $_SERVER['HTTP_USER_AGENT'];
+          	//Obtén la cadena de caractéres del agente de usuario
+			$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE usuario = $1 LIMIT 1";
       		$sqlName = "confirmInitialChain";
 			if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
 				//Ejecuta la consulta preparada.
@@ -91,14 +92,16 @@ class inicioSesionVAdmonClass {
 				$fetchArr = pg_fetch_all($result);
               	//Si el usuario existe
 				if(sizeof($fetchArr) == 1) {
-					$revisarInicio = hash('sha256', $contrasenia.$navegadorUsr);
-					if($revisarInicio == $cadenaInicio) {
-						//¡¡¡¡Conectado!!!!
-						return true;
-					} else {
-						//No conectado
-						return false;
-					}
+                  	while($confirmUser = pg_fetch_array($result)){
+                        $revisarInicio = hash('sha256', $confirmUser['contrasenia'].$navegadorUsr);
+                        if($revisarInicio == $cadenaInicio) {
+                            //¡¡¡¡Conectado!!!!
+                            return true;
+                        } else {
+                            //No conectado
+                            return false;
+                        }
+                    }
 				} else {
 					//No conectado
 				return false;
