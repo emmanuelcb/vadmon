@@ -25,7 +25,7 @@ class inicioSesionVAdmonClass {
 			if(sizeof($fetchArr) == 1) {
               	$userRs = fetchArr[0];
 				//Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
-              	echo $userRs['id'];
+              	echo $userRs['id'].' '.$userRs['usuario'].' '.$userRs['contrasenia'];
 				if($this->revisarFuerzaBrutaVAdmon($userRs["id"], $planconexion) == true) {
 					//La cuenta está bloqueada
 					//Envia un correo electrónico al usuario que le informa que su cuenta está bloqueada
