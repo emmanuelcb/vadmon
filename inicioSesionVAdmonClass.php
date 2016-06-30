@@ -24,7 +24,7 @@ class inicioSesionVAdmonClass {
           	$fetchArr = pg_fetch_all($result);
           	//Si el usuario existe.
 			if(sizeof($fetchArr) == 1) {
-              	$rowRecord = pg_fetch_array($result
+              	$rowRecord = pg_fetch_array($result);
               	$userRs = rowRecord[0];
               	echo $userRs['id'].' '.$userRs['usuario'].' '.$userRs['contrasenia'].'<br/>';
 				//Revisamos si la cuenta está bloqueada de muchos intentos de conexión.
