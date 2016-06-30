@@ -21,6 +21,7 @@ class inicioSesionVAdmonClass {
 			//$contrasenia = hash('sha256', $contrasenia);
           	$result = pg_execute($planconexion, $sqlName, array($usuario));
           	$fetchArr = pg_fetch_all($result);
+          	echo $fetchArr;
           	//Si el usuario existe.
 			if(sizeof($fetchArr) == 1) {
               	$userRs = fetchArr[0];
