@@ -4,10 +4,10 @@ if($paginaActual=="index.php"){
 }
 // VERSION DEL SISTEMA
 $version_vadmon= 1.1;
-/*
+
 include("funciones.php");
 $claseFunciones = new claseFunciones;
-
+/*
 $meses= array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 $dias_agenda= array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado");
 $dias= array("Sa","Do","Lu","Ma","Mi","Ju","Vi");
