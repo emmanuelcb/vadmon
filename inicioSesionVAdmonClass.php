@@ -92,6 +92,7 @@ class inicioSesionVAdmonClass {
 				//Ejecuta la consulta preparada.
 				$result = pg_execute($planconexion, $sqlName, array($idUsuario));
               	echo 'Result '.$result.'<br/>';
+              	echo 'First Row '.pg_fetch_result($result, 1, 0);
 				$fetchArr = pg_fetch_all($result);
               	echo 'Size '.sizeof($fetchArr).'<br/>';
               	echo 'FetchArr '.$fetchArr.'<br/>';
