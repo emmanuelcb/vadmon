@@ -155,7 +155,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// REVISO NUMERO DE CONTENIDOS Y EL LIMITE
-    /*$strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    $strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strContenidosTableExistsSQL .= 'WHERE table_schema = \'vadmon_contenidos\'';
     $strContenidosTableExistsSQLName = 'isThereExistingContenidosTable';
 	if(pg_prepare($conexion, $strContenidosTableExistsSQLName, $strContenidosTableExistsSQL)) {
@@ -173,8 +173,9 @@ if($archivoActual <> "index.php")
 		$fetchArr = pg_fetch_all($result);
 		$numeroContenidos = sizeof($fetchArr);
 	}
-           
-    $strConfigurationTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    
+  	// REVISO LA CONFIGURACION
+    /*$strConfigurationTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strConfigurationTableExistsSQL .= 'WHERE table_schema = \'vadmon_configuracion\'';
     $strConfigurationTableExistsSQLName = 'isThereExistingConfiguracionTable';
 	if(pg_prepare($conexion, $strConfigurationTableExistsSQLName, $strConfigurationTableExistsSQL)) {
