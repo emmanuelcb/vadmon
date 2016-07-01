@@ -5,7 +5,7 @@ include("vadmoninstalacion.php");
 include("inicioSesionVAdmonClass.php");
 $claseVAdmon = new inicioSesionVAdmonClass;
 $claseVAdmon->sesionSeguraVAdmonInicio();
-if($claseVAdmon->revisaInicioVAdmon($planconexion) == true){
+if($claseVAdmon->revisaInicioVAdmon($planconexion) == false){
 	include("ivariables.php");
 	include('encabezado.php');
 	include('contenedor.php');
