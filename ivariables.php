@@ -11,7 +11,7 @@ $claseFunciones = new claseFunciones;
 $meses= array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 $dias_agenda= array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado");
 $dias= array("Sa","Do","Lu","Ma","Mi","Ju","Vi");
-/*
+
 // VARIABLES GENERALES
 $mensaje="";
 $fechahoy=date("Y-m-d");      // lee la fecha
@@ -61,7 +61,7 @@ $ppapelera='';
 $peditar='';
 $pcrear='';
 $peliminar='';
-
+/*
 if($archivoActual <> "index.php")
 {
 	// REVISO SI EL SISTEMA ESTA ACTUALIZADO
