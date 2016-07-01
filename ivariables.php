@@ -61,9 +61,9 @@ $ppapelera='';
 $peditar='';
 $pcrear='';
 $peliminar='';
-/*
+
 if($archivoActual <> "index.php")
-{
+{/*
 	// REVISO SI EL SISTEMA ESTA ACTUALIZADO
 	$versionCliente = '';
   	$strVersionTableExistsSQL = "SELECT table_name FROM information_schema.tables ';
@@ -233,6 +233,6 @@ if($archivoActual <> "index.php")
 
 	// IMAGENES
 	include("modulos/imagenes.php");
-
-}*/
+*/
+}
 ?>
