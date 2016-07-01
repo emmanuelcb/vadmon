@@ -5,7 +5,7 @@ if($paginaActual=="index.php"){
 // VERSION DEL SISTEMA
 $version_vadmon= 1.1;
 
-include("funciones.php");
+//include("funciones.php");
 $claseFunciones = new claseFunciones;
 
 $meses= array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
