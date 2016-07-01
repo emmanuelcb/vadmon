@@ -196,7 +196,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// LEE SUBCONTENIDOS
-	/*$opcionSubcontenidos="";
+	$opcionSubcontenidos="";
     $strContenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = 0 ORDER BY ordencontenido';
     $strContenidosDetailsSQLName = 'GetContenidosDetails';
 	if(pg_prepare($conexion, $strContenidosDetailsSQLName, $strContenidosDetailsSQL)){
@@ -229,7 +229,7 @@ if($archivoActual <> "index.php")
 			$opcionSubcontenidos.='</select>';
 		}
 	}
-
+/*
 	// MENSAJES
 	include("modulos/mensajes.php");
 
