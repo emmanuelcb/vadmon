@@ -86,7 +86,7 @@ class inicioSesionVAdmonClass {
           	echo 'Id Usuario '.$idUsuario.'<br/>';
           	echo 'Cadena Inicio '.$cadenaInicio.'<br/>';
           	//Obtén la cadena de caractéres del agente de usuario
-			$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE usuario = $1 LIMIT 1";
+			$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE id = $1 LIMIT 1";
       		$sqlName = "confirmInitialChain";
 			if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
               	echo 'Prepare was successful<br/>';
