@@ -119,7 +119,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// REVISO PERMISOS
-	/*if(isset($_COOKIE['nivelUsuario'])){
+	if(isset($_COOKIE['nivelUsuario'])){
       	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     	$strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
       	$strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
@@ -155,7 +155,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// REVISO NUMERO DE CONTENIDOS Y EL LIMITE
-    $strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    /*$strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strContenidosTableExistsSQL .= 'WHERE table_schema = \'vadmon_contenidos\'';
     $strContenidosTableExistsSQLName = 'isThereExistingContenidosTable';
 	if(pg_prepare($conexion, $strContenidosTableExistsSQLName, $strContenidosTableExistsSQL)) {
