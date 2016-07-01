@@ -92,7 +92,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// TRAIGO LOS DATOS DEL USUARIO
-	if(isset($_COOKIE['nivelUsuario'])){
+	/*if(isset($_COOKIE['nivelUsuario'])){
       	$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
       	$strUserDetailsSQL .= 'FROM vadmon_usuarios WHERE id = $1';
       	$strUserDetailsSQLName = 'GetUserDetails';
@@ -233,5 +233,6 @@ if($archivoActual <> "index.php")
 
 	// IMAGENES
 	include("modulos/imagenes.php");
+*/
 }
 ?>
