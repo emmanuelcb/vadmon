@@ -69,7 +69,7 @@ if($archivoActual <> "index.php")
   	$strVersionTableExistsSQL = "SELECT table_name FROM information_schema.tables ';
     $strVersionTableExistsSQL .= "WHERE table_schema = 'vadmon_version'";
   	$strVersionTableExistsSQLName = 'isThereExistingVersionTable'
-	if(pg_prepare($planconexion, $strVersionTableExistsSQLName, $strVersionTableExistsSQL)) {
+	if(pg_prepare($conexion, $strVersionTableExistsSQLName, $strVersionTableExistsSQL)) {
       	/*$result = pg_execute($conexion, $strVersionTableSQLName);
   		$fetchArr = pg_fetch_all($result);
 		if(sizeof($fecthArray) == 0) {
