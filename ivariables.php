@@ -92,8 +92,8 @@ if($archivoActual <> "index.php")
 	}
 
 	// TRAIGO LOS DATOS DEL USUARIO
-	if(isset($_COOKIE['nivelUsuario'])){
-      	/*$strUsuariosTableExistsSQLName = '';
+	if(isset($_COOKIE['idUsuario'])){
+      	$strUsuariosTableExistsSQLName = 'isThereExistingUsuariosTable';
       	$strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
       	$strUsuariosTableExistsSQL .= 'WHERE table_schema = \'vadmon_usuarios\'';
       	if(pg_prepare($conexion, $strUsuariosTableExistsSQLName, $strUsuariosTableExistsSQL)){
@@ -103,7 +103,7 @@ if($archivoActual <> "index.php")
               	include("acciones/instalacion/vadmon_usuarios.php");
             }
         }
-      	$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
+      	/*$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
       	$strUserDetailsSQL .= 'FROM vadmon_usuarios WHERE id = $1';
       	$strUserDetailsSQLName = 'GetUserDetails';
 		if(pg_prepare($conexion, $strUserDetailsSQLName, $strUserDetailsSQL){
