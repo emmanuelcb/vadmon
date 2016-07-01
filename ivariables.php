@@ -70,11 +70,11 @@ if($archivoActual <> "index.php")
     $strVersionTableExistsSQL .= "WHERE table_schema = 'vadmon_version'";
   	$strVersionTableExistsSQLName = 'isThereExistingVersionTable'
 	if(pg_prepare($planconexion, $strVersionTableExistsSQLName, $strVersionTableExistsSQL)) {
-      	$result = pg_execute($conexion, $strVersionTableSQLName);
+      	/*$result = pg_execute($conexion, $strVersionTableSQLName);
   		$fetchArr = pg_fetch_all($result);
 		if(sizeof($fecthArray) == 0) {
 			include("acciones/instalacion/vadmon_version.php");
-		}
+		}*/
 	}
   	/*$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
     $strVersionDetailsSQLName = 'GetVersionDetails';
