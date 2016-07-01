@@ -1,6 +1,6 @@
 <?php
 if($paginaActual=="index.php"){
-	//include("conexion.php");
+	include("conexion.php");
 }
 // VERSION DEL SISTEMA
 $version_vadmon= 1.1;
