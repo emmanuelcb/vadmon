@@ -91,7 +91,10 @@ class inicioSesionVAdmonClass {
               	echo 'Prepare was successful<br/>';
 				//Ejecuta la consulta preparada.
 				$result = pg_execute($planconexion, $sqlName, array($idUsuario));
+              	echo 'Result '.$result.'<br/>';
 				$fetchArr = pg_fetch_all($result);
+              	echo 'Size '.sizeof($fetchArr).'<br/>';
+              	print_r($fetchArr);
               	//Si el usuario existe
 				if(sizeof($fetchArr) == 1) {
                   	while($confirmUser = pg_fetch_array($result)){
