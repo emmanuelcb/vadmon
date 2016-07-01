@@ -83,29 +83,18 @@ class inicioSesionVAdmonClass {
 			$cadenaInicio = $_SESSION['cadenaInicioVAdmon'];
 			$nombreUsr = $_SESSION['nombreUsrVAdmon'];
 			$navegadorUsr = $_SERVER['HTTP_USER_AGENT'];
-          	echo 'Id Usuario '.$idUsuario.'<br/>';
-          	echo 'Cadena Inicio '.$cadenaInicio.'<br/>';
           	//Obtén la cadena de caractéres del agente de usuario
 			$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE id = $1 LIMIT 1";
       		$sqlName = "confirmInitialChain";
 			if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
-              	echo 'Prepare was successful<br/>';
 				//Ejecuta la consulta preparada.
 				$result = pg_execute($planconexion, $sqlName, array($idUsuario));
-              	echo 'Result '.$result.'<br/>';
-              	$var = pg_fetch_result($result, 1, 0);
-              	echo 'First Row '.$var;
 				$fetchArr = pg_fetch_all($result);
-              	echo 'Size '.sizeof($fetchArr).'<br/>';
-              	echo 'FetchArr '.$fetchArr.'<br/>';
               	print_r($fetchArr);
               	//Si el usuario existe
 				if(sizeof($fetchArr) == 1) {
-                  	echo 'Is in...';
                   	while($confirmUser = pg_fetch_array($result)){
-                      	echo 'confirmUser ('.$confirmUser.')';
                         $revisarInicio = hash('sha256', $confirmUser['contrasenia'].$navegadorUsr);
-                      	echo $revisarInicio.'<br/>';
                         if($revisarInicio == $cadenaInicio) {
                             //¡¡¡¡Conectado!!!!
                             return true;
