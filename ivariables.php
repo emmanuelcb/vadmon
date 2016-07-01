@@ -65,7 +65,7 @@ $peliminar='';
 if($archivoActual <> "index.php")
 {
 	// REVISO SI EL SISTEMA ESTA ACTUALIZADO
-	/*$versionCliente = '';
+	$versionCliente = '';
   	$strVersionTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strVersionTableExistsSQL .= 'WHERE table_schema = \'vadmon_version\'';
   	$strVersionTableExistsSQLName = 'isThereExistingVersionTable';
@@ -92,7 +92,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// TRAIGO LOS DATOS DEL USUARIO
-	if(isset($_COOKIE['nivelUsuario'])){
+	/*if(isset($_COOKIE['nivelUsuario'])){
       	$strUsuariosTableExistsSQLName = '';
       	$strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
       	$strUsuariosTableExistsSQL .= 'WHERE table_schema = \'vadmon_usuarios\'';
