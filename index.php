@@ -6,7 +6,7 @@ include("inicioSesionVAdmonClass.php");
 $claseVAdmon = new inicioSesionVAdmonClass;
 $claseVAdmon->sesionSeguraVAdmonInicio();
 if($claseVAdmon->revisaInicioVAdmon($planconexion) == true){
-	include("ivariables.php");
+	//include("ivariables.php");
 	include('encabezado.php');
 	include('contenedor.php');
 	include('pie.php');
