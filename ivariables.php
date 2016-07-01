@@ -76,7 +76,7 @@ if($archivoActual <> "index.php")
 			include("acciones/instalacion/vadmon_version.php");
 		}
 	}
-  	/*$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
+  	$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
     $strVersionDetailsSQLName = 'GetVersionDetails';
 	if(pg_prepare($conexion, $strVersionDetailsSQLName, $strVersionDetailsSQL)){
 		$result = pg_execute($conexion, $strVersionDetailsSQLName);
@@ -233,6 +233,5 @@ if($archivoActual <> "index.php")
 
 	// IMAGENES
 	include("modulos/imagenes.php");
-*/
 }
 ?>
