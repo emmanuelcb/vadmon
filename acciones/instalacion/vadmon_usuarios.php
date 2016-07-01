@@ -1,14 +1,6 @@
 <?php
-mysql_query("CREATE TABLE `vadmon_usuarios` (
-  `id` smallint(5) NOT NULL auto_increment,
-  `nick` varchar(30) collate latin1_spanish_ci NOT NULL default '',
-  `password` varchar(32) collate latin1_spanish_ci NOT NULL default '',
-  `nombre` varchar(32) collate latin1_spanish_ci NOT NULL default '',
-  `apellidos` varchar(32) collate latin1_spanish_ci NOT NULL default '',
-  `email` varchar(62) collate latin1_spanish_ci NOT NULL default '',
-  `avatar` varchar(255) collate latin1_spanish_ci NOT NULL default '',
-  `nivelusuario` varchar(255) collate latin1_spanish_ci default 'invitado',
-  `activo` int(11) default '1',
-  PRIMARY KEY  (`id`))
-  ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci ") ;
+$qryCreateUsuarios = 'CREATE TABLE vadmon_usuarios (';
+$qryCreateUsuarios .= 'id SERIAL PRIMARY KEY, nick VARCHAR(30) NOT NULL, password VARCHAR(32) NOT NULL, nombre VARCHAR(32) NOT NULL, apellidos VARCHAR(32) NOT NULL,';
+$qryCreateUsuarios .= 'email VARCHAR(62) NOT NULL, avatar VARCHAR(255) NOT NULL, nivelusuario VARCHAR(255) DEFAULT \'invitado\', activo BOOLEAN DEFAULT TRUE);';
+pg_query($conexion, $qryCreateUsuarios);
 ?>
