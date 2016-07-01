@@ -7,6 +7,6 @@ $strInsertUsuarioPlanSQL .= 'VALUES(1, $1, $2, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 if(pg_prepare($planconexion, $strInsertUsuarioPlanSQLName, $strInsertUsuarioPlanSQL))
 {
   	pg_execute($planconexion, $strInsertUsuarioPlanSQLName, array($_POST["usuario"], $_POST["contrasenia"]));
-  	header("location: index.php");
+  	header("location: ../index.php");
 }
 ?>
