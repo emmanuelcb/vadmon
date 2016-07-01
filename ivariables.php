@@ -229,10 +229,10 @@ if($archivoActual <> "index.php")
 			$opcionSubcontenidos.='</select>';
 		}
 	}
-/*
+
 	// MENSAJES
 	include("modulos/mensajes.php");
-
+/*
 	// USUARIOS
 	include("modulos/usuarios.php");
 
