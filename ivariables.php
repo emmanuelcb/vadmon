@@ -73,7 +73,7 @@ if($archivoActual <> "index.php")
       	$result = pg_execute($conexion, $strVersionTableSQLName);
   		$fetchArr = pg_fetch_all($result);
 		if(sizeof($fecthArray) == 0) {
-			include("acciones/instalacion/vadmon_version.php");
+			//include("acciones/instalacion/vadmon_version.php");
 		}
 	}
   	$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
