@@ -175,7 +175,7 @@ if($archivoActual <> "index.php")
 	}
     
   	// REVISO LA CONFIGURACION
-    /*$strConfigurationTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    $strConfigurationTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strConfigurationTableExistsSQL .= 'WHERE table_schema = \'vadmon_configuracion\'';
     $strConfigurationTableExistsSQLName = 'isThereExistingConfiguracionTable';
 	if(pg_prepare($conexion, $strConfigurationTableExistsSQLName, $strConfigurationTableExistsSQL)) {
@@ -196,7 +196,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// LEE SUBCONTENIDOS
-	$opcionSubcontenidos="";
+	/*$opcionSubcontenidos="";
     $strContenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = 0 ORDER BY ordencontenido';
     $strContenidosDetailsSQLName = 'GetContenidosDetails';
 	if(pg_prepare($conexion, $strContenidosDetailsSQLName, $strContenidosDetailsSQL)){
