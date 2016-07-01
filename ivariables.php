@@ -1,11 +1,11 @@
 <?php
 if($paginaActual=="index.php"){
-	//include("conexion.php");
+	include("conexion.php");
 }
 // VERSION DEL SISTEMA
 $version_vadmon= 1.1;
-
-//include("funciones.php");
+/*
+include("funciones.php");
 $claseFunciones = new claseFunciones;
 
 $meses= array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -20,7 +20,7 @@ $diahoy=date("d");
 $meshoy=date("m");
 $anohoy=date("Y");
 
-/* DEFINO VARIABLES DEL SISTEMA */
+// DEFINO VARIABLES DEL SISTEMA
 $cssExtra='';
 $javascriptExtra='';
 $jsUrlExtra='';
@@ -39,13 +39,13 @@ $limiteContenidos='';
 $paginaActual='';
 $nivelUsuario='';
 
-/* VARIABLES DE USUARIO */
+// VARIABLES DE USUARIO
 $usuarionombre='';
 $usuarioapellidos='';
 $usuarioavatar='';
 $usuarionivel='';
 
-/* DEFINO VARIABLES DE PERMISOS */
+// DEFINO VARIABLES DE PERMISOS
 $pcontenidos='';
 $pnoticias='';
 $particulos='';
@@ -64,7 +64,7 @@ $peliminar='';
 
 if($archivoActual <> "index.php")
 {
-	/*REVISO SI EL SISTEMA ESTA ACTUALIZADO */
+	// REVISO SI EL SISTEMA ESTA ACTUALIZADO
 	$versionCliente = '';
   	$strVersionTableExistsSQL = "SELECT table_name FROM information_schema.tables ';
     $strVersionTableExistsSQL .= "WHERE table_schema = 'vadmon_version'";
@@ -91,7 +91,7 @@ if($archivoActual <> "index.php")
 		}
 	}
 
-	/* TRAIGO LOS DATOS DEL USUARIO */
+	// TRAIGO LOS DATOS DEL USUARIO
 	if(isset($_COOKIE['nivelUsuario'])){
       	$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
       	$strUserDetailsSQL .= 'FROM vadmon_usuarios WHERE id = $1';
@@ -108,7 +108,7 @@ if($archivoActual <> "index.php")
 		}
 	}
 
-	/*REVISO PERMISOS */
+	// REVISO PERMISOS
 	if(isset($_COOKIE['nivelUsuario'])){
       	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     	$strPermisosTableExistsSQL .= "WHERE table_schema = 'vadmon_permisos'";
@@ -144,7 +144,7 @@ if($archivoActual <> "index.php")
 		}
 	}
 
-	/* REVISO NUMERO DE CONTENIDOS Y EL LIMITE */
+	// REVISO NUMERO DE CONTENIDOS Y EL LIMITE
     $strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strContenidosTableExistsSQL .= 'WHERE table_schema = \'vadmon_contenidos\'';
     $strContenidosTableExistsSQLName = 'isThereExistingContenidosTable';
@@ -184,7 +184,7 @@ if($archivoActual <> "index.php")
 		}
 	}
 
-	/* LEE SUBCONTENIDOS */
+	// LEE SUBCONTENIDOS
 	$opcionSubcontenidos="";
     $strContenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = 0 ORDER BY ordencontenido';
     $strContenidosDetailsSQLName = 'GetContenidosDetails';
@@ -219,20 +219,20 @@ if($archivoActual <> "index.php")
 		}
 	}
 
-	/* MENSAJES */
+	// MENSAJES
 	include("modulos/mensajes.php");
 
-	/* USUARIOS */
+	// USUARIOS
 	include("modulos/usuarios.php");
 
-	/* MENUS */
+	// MENUS
 	include("modulos/menus.php");
 
-	/* SECCIONES */
+	// SECCIONES
 	include("modulos/secciones.php");
 
-	/* IMAGENES */
+	// IMAGENES
 	include("modulos/imagenes.php");
 
-}
+}*/
 ?>
