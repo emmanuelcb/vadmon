@@ -103,10 +103,10 @@ if($archivoActual <> "index.php")
               	include("acciones/instalacion/vadmon_usuarios.php");
             }
         }
-      	/*$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
+      	$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
       	$strUserDetailsSQL .= 'FROM vadmon_usuarios WHERE id = $1';
       	$strUserDetailsSQLName = 'GetUserDetails';
-		if(pg_prepare($conexion, $strUserDetailsSQLName, $strUserDetailsSQL){
+		if(pg_prepare($conexion, $strUserDetailsSQLName, $strUserDetailsSQL)){
 			$result = pg_execute($conexion, $strUserDetailsSQLName, array($_COOKIE["idUsuario"]));
 			$fetchArr = pg_fetch_all($result);
 			while($row = pg_fetch_array($result)){
@@ -115,7 +115,7 @@ if($archivoActual <> "index.php")
 				$usuarioavatar 		= $row['avatar'];
 				$usuarionivel 		= $row['nivelusuario'];
 			}
-		}*/
+		}
 	}
 
 	// REVISO PERMISOS
