@@ -63,7 +63,7 @@ $pcrear='';
 $peliminar='';
 
 if($archivoActual <> "index.php")
-{/*
+{
 	// REVISO SI EL SISTEMA ESTA ACTUALIZADO
 	$versionCliente = '';
   	$strVersionTableExistsSQL = "SELECT table_name FROM information_schema.tables ';
@@ -90,7 +90,7 @@ if($archivoActual <> "index.php")
 			}
 		}
 	}
-
+/*
 	// TRAIGO LOS DATOS DEL USUARIO
 	if(isset($_COOKIE['nivelUsuario'])){
       	$strUserDetailsSQL = 'SELECT nombre, apellidos, avatar, nivelusuario ';
