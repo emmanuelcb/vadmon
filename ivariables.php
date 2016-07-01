@@ -92,8 +92,8 @@ if($archivoActual <> "index.php")
 	}
 
 	// TRAIGO LOS DATOS DEL USUARIO
-	/*if(isset($_COOKIE['nivelUsuario'])){
-      	$strUsuariosTableExistsSQLName = '';
+	if(isset($_COOKIE['nivelUsuario'])){
+      	/*$strUsuariosTableExistsSQLName = '';
       	$strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
       	$strUsuariosTableExistsSQL .= 'WHERE table_schema = \'vadmon_usuarios\'';
       	if(pg_prepare($conexion, $strUsuariosTableExistsSQLName, $strUsuariosTableExistsSQL)){
@@ -115,11 +115,11 @@ if($archivoActual <> "index.php")
 				$usuarioavatar 		= $row['avatar'];
 				$usuarionivel 		= $row['nivelusuario'];
 			}
-		}
+		}*/
 	}
 
 	// REVISO PERMISOS
-	if(isset($_COOKIE['nivelUsuario'])){
+	/*if(isset($_COOKIE['nivelUsuario'])){
       	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     	$strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
       	$strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
