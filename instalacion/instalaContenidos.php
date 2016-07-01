@@ -5,5 +5,5 @@ $qryCreateContenidos .="titulocontenido VARCHAR(255) DEFAULT NULL,textocontenido
 $qryCreateContenidos .="imagen2contenido VARCHAR(255) DEFAULT NULL, imagen3contenido VARCHAR(255) DEFAULT NULL, creador VARCHAR(255) DEFAULT NULL,";
 $qryCreateContenidos .="fechacreacion DATE DEFAULT CURRENT_DATE, modificador VARCHAR(255) DEFAULT NULL, fechamodificacion DATE DEFAULT CURRENT_DATE,";
 $qryCreateContenidos .="keywordscontenido VARCHAR(255) DEFAULT NULL, descripcioncontenido TEXT, fijo INTEGER DEFAULT 0, activo INTEGER DEFAULT 1);";
-$result = pg_query($conexion, $qryCreateContenidos);
+pg_query($conexion, $qryCreateContenidos);
 ?>
