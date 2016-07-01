@@ -94,10 +94,13 @@ class inicioSesionVAdmonClass {
               	echo 'Result '.$result.'<br/>';
 				$fetchArr = pg_fetch_all($result);
               	echo 'Size '.sizeof($fetchArr).'<br/>';
+              	echo $fetchArr;
               	print_r($fetchArr);
               	//Si el usuario existe
 				if(sizeof($fetchArr) == 1) {
+                  	echo 'Is in...';
                   	while($confirmUser = pg_fetch_array($result)){
+                      	echo $confirmUser;
                         $revisarInicio = hash('sha256', $confirmUser['contrasenia'].$navegadorUsr);
                       	echo $revisarInicio.'<br/>';
                         if($revisarInicio == $cadenaInicio) {
