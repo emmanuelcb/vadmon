@@ -83,11 +83,12 @@ class inicioSesionVAdmonClass {
 			$cadenaInicio = $_SESSION['cadenaInicioVAdmon'];
 			$nombreUsr = $_SESSION['nombreUsrVAdmon'];
 			$navegadorUsr = $_SERVER['HTTP_USER_AGENT'];
-          	echo 'Cadena Inicio'.$cadenaInicio.'<br/>';
+          	echo 'Cadena Inicio '.$cadenaInicio.'<br/>';
           	//Obtén la cadena de caractéres del agente de usuario
 			$sqlStr = "SELECT id, usuario, contrasenia FROM vadmon_planes WHERE usuario = $1 LIMIT 1";
       		$sqlName = "confirmInitialChain";
 			if (pg_prepare($planconexion, $sqlName, $sqlStr)) {
+              	echo 'Prepare was successful<br/>';
 				//Ejecuta la consulta preparada.
 				$result = pg_execute($planconexion, $sqlName, array($idUsuario));
 				$fetchArr = pg_fetch_all($result);
