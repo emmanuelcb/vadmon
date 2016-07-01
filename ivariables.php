@@ -1,6 +1,6 @@
 <?php
 if($paginaActual=="index.php"){
-	include("conexion.php");
+	//include("conexion.php");
 }
 // VERSION DEL SISTEMA
 $version_vadmon= 1.1;
@@ -65,7 +65,7 @@ $peliminar='';
 if($archivoActual <> "index.php")
 {
 	// REVISO SI EL SISTEMA ESTA ACTUALIZADO
-	$versionCliente = '';
+	/*$versionCliente = '';
   	$strVersionTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strVersionTableExistsSQL .= 'WHERE table_schema = \'vadmon_version\'';
   	$strVersionTableExistsSQLName = 'isThereExistingVersionTable';
@@ -119,7 +119,7 @@ if($archivoActual <> "index.php")
 	}
 
 	// REVISO PERMISOS
-	/*if(isset($_COOKIE['nivelUsuario'])){
+	if(isset($_COOKIE['nivelUsuario'])){
       	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     	$strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
       	$strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
