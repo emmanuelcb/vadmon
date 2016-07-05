@@ -32,7 +32,7 @@ $strGetPlanSQLName = 'getPlan';
 echo "get plan<br/>";
 if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion))) 
 {
-  	print_r($rslGetPlan);
+  	print_r(pg_fetch_all($rslGetPlan));
 	if(pg_num_rows($rslGetPlan) > 0) {
       	while($row = pg_fetch_row($rslGetPlan)) {
           	echo 'ROW<br/>';
