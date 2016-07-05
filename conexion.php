@@ -32,8 +32,8 @@ $strGetPlanSQLName = 'getPlan';
 echo 'START! '.$idSesion;
 if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
   	$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
-  	print_r($result);
-  	/*$fetchArr = pg_fetch_all($result);
+  	$fetchArr = pg_fetch_all($result);
+  	print_r($fetchArr);
 	if(sizeof(fetchArr) > 0) {
       	while($row = pg_fetch_array($result) {
 			$Id_p = $row['id'];
