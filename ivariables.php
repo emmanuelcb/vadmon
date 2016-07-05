@@ -76,13 +76,11 @@ if($archivoActual <> "index.php")
 		}
 	}
   	$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
-    $strVersionDetailsSQLName = 'GetVersionDetails';
-	if(pg_prepare($conexion, $strVersionDetailsSQLName, $strVersionDetailsSQL)){
-		$result = pg_execute($conexion, $strVersionDetailsSQLName);
-      	print_r(pg_fetch_array($result));
-		while($row = pg_fetch_assoc($result)){
+    if($rslVersionDetails = pg_query($conexion, $strVersionDetailsSQL))
+    {
+      	print_r($rslVersionDetails));
+		while($row = pg_fetch_assoc($rslVersionDetails)){
 			$versionCliente = $row['version'];
-          	echo $row['version'];
 		}
 		if(!isset($_GET["version"])){
 			if($versionCliente < $version_vadmon){
