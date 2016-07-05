@@ -5,7 +5,7 @@ $claseVAdmon = new inicioSesionVAdmonClass;
 $claseVAdmon->sesionSeguraVAdmonInicio();
 include ('conexion.php');
 
-$strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios where nick = $1 AND password = $2';
+$strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios where nick = $1';
 if($rslComprueba = pg_query_params($conexion, $strCompruebaSQL, array($_POST["usuario"], $_POST["contrasenia"])))
 {
   	echo pg_num_rows($rslComprueba);
