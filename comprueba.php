@@ -10,8 +10,7 @@ $strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios
 if(pg_prepare($conexion, $strCompruebaSQLName, $strCompruebaSQL))
 {
 	$rslComprueba = pg_execute($conexion, $strCompruebaSQLName, array($_POST["usuario"], $_POST["contrasenia"]));
-  	$fetchComprueba = pg_fetch_all($rslComprueba);
-	if(sizeof($fetchComprueba) > 0) {
+	if(sizeof($rslComprueba) > 0) {
 		while($rowComprueba = pg_fetch_assoc($rslComprueba))
         {
 			setcookie("idUsuario", "".$rowComprueba['id']."", time()+(3600 * 24));
