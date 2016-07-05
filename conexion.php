@@ -29,7 +29,7 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 }
 $strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
-echo 'START! '.$idSesion;
+echo 'START! '.$idSesion.'<br/>';
 $query = pg_query($planconexion, $strGetPlanSQL, array($idSesion));
 echo 'Query: '.$query;
 if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
