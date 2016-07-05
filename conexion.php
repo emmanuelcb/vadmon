@@ -27,7 +27,7 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 	$claseVAdmon->sesionSeguraVAdmonInicio();
 	$idSesion = $_SESSION["idUsuarioVAdmon"];
 }
-$strGetPlanSQL = 'SELECT id, usuario, planusuarios, planpermisos, planarticulos, plannoticias, planencuestas, planpromociones, plandisenio, planregistro, servidor, servidorbd, servidorusuario, servidorpass, servidorftpdirectorio, servidorftpusuario, servidorftppass FROM vadmon_planes WHERE id = $1 LIMIT 1';
+/*$strGetPlanSQL = 'SELECT id, usuario, planusuarios, planpermisos, planarticulos, plannoticias, planencuestas, planpromociones, plandisenio, planregistro, servidor, servidorbd, servidorusuario, servidorpass, servidorftpdirectorio, servidorftpusuario, servidorftppass FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
 if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
   	$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
@@ -55,5 +55,5 @@ if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
 	}
 }
 $strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
-$conexion = pg_connect($strPgConnection);
+$conexion = pg_connect($strPgConnection);*/
 ?>
