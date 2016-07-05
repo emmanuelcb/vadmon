@@ -273,10 +273,9 @@ if($archivoActual <> "index.php")
     {
       // Colocamos la version actual
       $strInsertUsrSQL = 'INSERT INTO vadmon_usuarios (nick, password, nombre, apellidos, email, avatar, nivelusuario, activo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-      $strInsertUsrSQLName = 'insertUsr';
-      if(pg_prepare($conexion, $strInsertVersionSQLName, $strInsertVersionSQL))
+      if($rslInsertUsr = pg_query($conexion, $strInsertVersionSQL, array('admin','adminECB1208!','Administrador','Cruz','emmanuel.cb@outlook.com','avatar.jpg','maestro', TRUE)))
       {
-          pg_execute($conexion, $strCreateVersionTableSQLName, array('admin','adminECB1208!','Administrador','Cruz','emmanuel.cb@outlook.com','avatar.jpg','maestro', TRUE));
+          echo 'User Inserted';
       }
     }
 }
