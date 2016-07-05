@@ -1,5 +1,7 @@
 <?php
+echo "iVariables";
 if($paginaActual=="index.php"){
+  	echo "include conexion";
 	include("conexion.php");
 }
 // VERSION DEL SISTEMA
