@@ -27,10 +27,10 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 	$claseVAdmon->sesionSeguraVAdmonInicio();
 	$idSesion = $_SESSION["idUsuarioVAdmon"];
 }
-$strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = $1 LIMIT 1';
+$strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = '..' LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
 echo "get plan<br/>";
-if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) 
+if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion))) 
 {
   	echo TRUE;
   	/*$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
