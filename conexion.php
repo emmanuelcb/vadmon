@@ -35,6 +35,7 @@ if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion)
   	print_r(pg_fetch_all($rslGetPlan));
 	if(pg_num_rows($rslGetPlan) > 0) {
       	while($row = pg_fetch_array($rslGetPlan)) {
+          	echo '<br/>';
           	print_r($row);
 			$Id_p = $row['id'];
 			$Usuario_p = $row['usuario'];
