@@ -29,14 +29,11 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 }
 $strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
-echo "get plan<br/>";
 if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion))) 
 {
-  	print_r(pg_fetch_all($rslGetPlan));
 	if(pg_num_rows($rslGetPlan) > 0) {
-      	while($row = pg_fetch_assoc($rslGetPlan)) {
-          	echo '<br/>';
-          	print_r($row);
+      	while($row = pg_fetch_assoc($rslGetPlan))
+        {
 			$Id_p = $row['id'];
 			$Usuario_p = $row['usuario'];
 			$PlanUsuarios_p = $row['planusuarios'];
@@ -58,6 +55,5 @@ if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion)
 	}
 }
 $strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
-echo $strPgConnection;
-// $conexion = pg_connect($strPgConnection);
+$conexion = pg_connect($strPgConnection);
 ?>
