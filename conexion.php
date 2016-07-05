@@ -56,7 +56,7 @@ if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
 		}
 	}*/
 }
-$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
+/*$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
 echo $strPgConnection;
-$conexion = pg_connect($strPgConnection);
+$conexion = pg_connect($strPgConnection);*/
 ?>
