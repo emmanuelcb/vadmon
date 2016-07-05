@@ -244,5 +244,41 @@ if($archivoActual <> "index.php")
 
 	// IMAGENES
 	include("modulos/imagenes.php");
+}else{
+  	// REVISA SI EXISTE LA TABLA DE PERMISOS
+  	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    $strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
+    $strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
+    if(pg_prepare($conexion, $strPermisosTableExistsSQLName, $strPermisosTableExistsSQL)) {
+      $result = pg_execute($conexion, $strPermisosTableExistsSQLName);
+      $fetchArr = pg_fetch_all($result);
+      if(sizeof($fetchArr) == 0) {
+        include("acciones/instalacion/vadmon_permisos.php");
+      }
+    }
+  	// REVISA SI EXISTE LA TABLA DE USUARIOS
+  	$needNewUser = false;
+	$strUsuariosTableExistsSQLName = 'isThereExistingUsuariosTable';
+    $strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
+    $strUsuariosTableExistsSQL .= 'WHERE table_schema = \'vadmon_usuarios\'';
+    if(pg_prepare($conexion, $strUsuariosTableExistsSQLName, $strUsuariosTableExistsSQL)){
+      $result = pg_execute($conexion, $strUsuariosTableExistsSQLName);
+      $fetchArr = pg_fetch_all($result);
+      if(sizeof($fetchArr) == 0){
+        include("acciones/instalacion/vadmon_usuarios.php");
+        $needNewUser = true;
+      }
+    }
+  	// CREAMOS EL PRIMER USUARIO SI ESTE NO EXISTE
+  	if($needNewUser)
+    {
+      // Colocamos la version actual
+      $strInsertUsrSQL = 'INSERT INTO vadmon_usuarios (nick, password, nombre, apellidos, email, avatar, nivelusuario, activo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+      $strInsertUsrSQLName = 'insertUsr';
+      if(pg_prepare($conexion, $strInsertVersionSQLName, $strInsertVersionSQL))
+      {
+          pg_execute($conexion, $strCreateVersionTableSQLName, array('admin','adminECB1208!','Administrador','Cruz','emmanuel.cb@outlook.com','avatar.jpg','maestro', TRUE));
+      }
+    }
 }
 ?>
