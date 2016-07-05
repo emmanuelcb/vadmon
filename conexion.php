@@ -27,15 +27,11 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 	$claseVAdmon->sesionSeguraVAdmonInicio();
 	$idSesion = $_SESSION["idUsuarioVAdmon"];
 }
-$strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = $1';
+$strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
-echo 'START! '.$idSesion.'<br/>';
-$query = pg_query($planconexion, $strGetPlanSQL, array($idSesion));
-echo 'Query: '.$query;
 if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
-  	/*$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
+  	$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
   	$fetchArr = pg_fetch_all($result);
-  	print_r($fetchArr);
 	if(sizeof(fetchArr) > 0) {
       	while($row = pg_fetch_array($result) {
 			$Id_p = $row['id'];
@@ -56,8 +52,8 @@ if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
 			$FTPUsuario = $row['servidorftpusuario'];
 			$FTPPass = $row['servidorftppass'];
 		}
-	}*/
+	}
 }
-/*$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
+$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
 $conexion = pg_connect($strPgConnection);*/
 ?>
