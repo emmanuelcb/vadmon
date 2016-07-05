@@ -79,7 +79,7 @@ if($archivoActual <> "index.php")
     $strVersionDetailsSQLName = 'GetVersionDetails';
 	if(pg_prepare($conexion, $strVersionDetailsSQLName, $strVersionDetailsSQL)){
 		$result = pg_execute($conexion, $strVersionDetailsSQLName);
-      	echo 'rsl '.$result;
+      	print_r($result);
 		while($row = pg_fetch_assoc($result)){
 			$versionCliente = $row['version'];
           	echo $row['version'];
