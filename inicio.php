@@ -13,7 +13,6 @@ if($claseVAdmon->revisaInicioVAdmon($planconexion) == true){
 		header("location:index.php");
 	}else{
 		include("ivariables.php");
-		echo "ivariables included<br/>";
 		include('encabezado.php');
 		include('contenedor.php');
 		include('pie.php');
