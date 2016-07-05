@@ -245,6 +245,7 @@ if($archivoActual <> "index.php")
 	// IMAGENES
 	include("modulos/imagenes.php");
 }else{
+  	echo "No es Index.php";
   	// REVISA SI EXISTE LA TABLA DE PERMISOS
   	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
