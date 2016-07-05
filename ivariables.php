@@ -1,9 +1,6 @@
 <?php
-echo "iVariables";
-if($paginaActual=="index.php"){
-  	echo "include conexion";
-	include("conexion.php");
-}
+include("conexion.php");
+
 // VERSION DEL SISTEMA
 $version_vadmon= 1.1;
 
