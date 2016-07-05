@@ -29,9 +29,10 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 }
 $strGetPlanSQL = 'SELECT id, usuario, planusuarios, planpermisos, planarticulos, plannoticias, planencuestas, planpromociones, plandisenio, planregistro, servidor, servidorbd, servidorusuario, servidorpass, servidorftpdirectorio, servidorftpusuario, servidorftppass FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
-echo pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL);
-/*if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
+echo 'START!';
+if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
   	$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
+  	print_r($result);
   	$fetchArr = pg_fetch_all($result);
 	if(sizeof(fetchArr) > 0) {
       	while($row = pg_fetch_array($result) {
@@ -55,6 +56,6 @@ echo pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL);
 		}
 	}
 }
-$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
+/*$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
 $conexion = pg_connect($strPgConnection);*/
 ?>
