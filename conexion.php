@@ -32,10 +32,8 @@ $strGetPlanSQLName = 'getPlan';
 echo "get plan<br/>";
 if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion))) 
 {
-  	echo TRUE;
-  	/*$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
-  	$fetchArr = pg_fetch_all($result);
-	if(sizeof(fetchArr) > 0) {
+  	echo 'Rows; '.pg_num_rows($rslGetPlan);
+	/*if(sizeof(fetchArr) > 0) {
       	while($row = pg_fetch_array($result) {
 			$Id_p = $row['id'];
 			$Usuario_p = $row['usuario'];
