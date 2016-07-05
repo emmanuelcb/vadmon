@@ -78,14 +78,13 @@ if($archivoActual <> "index.php")
   	$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
     if($rslVersionDetails = pg_query($conexion, $strVersionDetailsSQL))
     {
-      	print_r($rslVersionDetails);
 		while($row = pg_fetch_assoc($rslVersionDetails)){
 			$versionCliente = $row['version'];
 		}
 		if(!isset($_GET["version"])){
 			if($versionCliente < $version_vadmon){
 				$actSig = $versionCliente;
-				//header( "location:inicio.php?mensaje=actualizacion&version=".$actSig);
+				header( "location:inicio.php?mensaje=actualizacion&version=".$actSig);
 			}
 		}
 	}
