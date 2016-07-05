@@ -8,6 +8,7 @@ include ('conexion.php');
 $strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios where nick = $1 AND password = $2';
 if($rslComprueba = pg_query_params($conexion, $strCompruebaSQL, array($_POST["usuario"], $_POST["contrasenia"])))
 {
+  	echo pg_num_rows($rslComprueba);
 	if(pg_num_rows($rslComprueba) > 0) {
 		while($rowComprueba = pg_fetch_assoc($rslComprueba))
         {
