@@ -235,10 +235,10 @@ if($archivoActual <> "index.php")
 
 	// USUARIOS
 	include("modulos/usuarios.php");
-/*
+
 	// MENUS
 	include("modulos/menus.php");
-
+/*
 	// SECCIONES
 	include("modulos/secciones.php");
 
