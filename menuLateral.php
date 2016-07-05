@@ -19,12 +19,12 @@
   $htmlBarraLateral .= '<table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td align="center">';
   $htmlBarraLateral .= '<table cellpadding="0" cellspacing="0" border="0"><tr>';
 
-  /*$imagenes='';
+  $imagenes='';
   $servidorImg = $HostDominio;
   if($servidorImg == "localhost"){ $servidorImg = 'vemeweb.com'; }
   $conexionftp = ftp_connect($servidorImg);
   $resultado = ftp_login($conexionftp, $FTPUsuario, $FTPPass);
-  //$archivos = ftp_nlist($conexionftp, $FTPDominioDir."/recursos/".$carpeta."/");*/
+  //$archivos = ftp_nlist($conexionftp, $FTPDominioDir."/recursos/".$carpeta."/");
 
   $htmlBarraLateral .= '<td width="50"><a href="inicio.php?idperfil='.$_COOKIE['idUsuario'].'" title="Perfil" class="imgPerfilThumb"><img src="http://'.$servidorImg.'/recursos/usuarios/.'$usuarioavatar.'" alt=""/></a></td>';
   $htmlBarraLateral .= '<td align="right"><p><span class="usuarioNombre">'.$usuarionombre.' '.$usuarioapellidos.'</span><br/><span class="usuarioNivel">'.$usuarionivel.'</span></p></td>';
