@@ -32,9 +32,8 @@ $strGetPlanSQLName = 'getPlan';
 echo "get plan<br/>";
 if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion))) 
 {
-  	echo 'Rows; '.pg_num_rows($rslGetPlan);
-	/*if(sizeof(fetchArr) > 0) {
-      	while($row = pg_fetch_array($result) {
+	if(pg_num_rows($rslGetPlan) > 0) {
+      	while($row = pg_fetch_row($rslGetPlan)) {
 			$Id_p = $row['id'];
 			$Usuario_p = $row['usuario'];
 			$PlanUsuarios_p = $row['planusuarios'];
@@ -53,7 +52,7 @@ if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion)
 			$FTPUsuario = $row['servidorftpusuario'];
 			$FTPPass = $row['servidorftppass'];
 		}
-	}*/
+	}
 }
 /*$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
 echo $strPgConnection;
