@@ -34,6 +34,8 @@ if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion)
 {
 	if(pg_num_rows($rslGetPlan) > 0) {
       	while($row = pg_fetch_row($rslGetPlan)) {
+          	echo 'ROW<br/>';
+          	echo $row['servidordb'];
 			$Id_p = $row['id'];
 			$Usuario_p = $row['usuario'];
 			$PlanUsuarios_p = $row['planusuarios'];
