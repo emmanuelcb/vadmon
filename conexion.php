@@ -27,7 +27,7 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 	$claseVAdmon->sesionSeguraVAdmonInicio();
 	$idSesion = $_SESSION["idUsuarioVAdmon"];
 }
-$strGetPlanSQL = 'SELECT id, usuario, planusuarios, planpermisos, planarticulos, plannoticias, planencuestas, planpromociones, plandisenio, planregistro, servidor, servidorbd, servidorusuario, servidorpass, servidorftpdirectorio, servidorftpusuario, servidorftppass FROM vadmon_planes WHERE id = $1 LIMIT 1';
+$strGetPlanSQL = 'SELECT * FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
 echo 'START! '.$idSesion;
 $query = pg_query($planconexion, $strGetPlanSQL, array($idSesion));
