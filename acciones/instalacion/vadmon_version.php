@@ -4,9 +4,8 @@ $strCreateVersionTableSQL = 'CREATE TABLE vadmon_version(id SERIAL PRIMARY KEY, 
 pg_query($conexion, $strCreateVersionTableSQL);
 // Colocamos la version actual
 $strInsertVersionSQL = 'INSERT INTO vadmon_version (version) VALUES ($1)';
-$strInsertVersionSQLName = 'insertVersion';
-if(pg_prepare($conexion, $strInsertVersionSQLName, $strInsertVersionSQL))
+if($rslInsertVersion = pg_query_params($conexion, $strInsertVersionSQL, array($version_vadmon)))
 {
-  	pg_execute($conexion, $strCreateVersionTableSQLName, array($version_vadmon));
+  	//To do...
 }
 ?>
