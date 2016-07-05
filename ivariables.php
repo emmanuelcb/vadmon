@@ -250,6 +250,7 @@ if($archivoActual <> "index.php")
   	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
     $strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
+  	echo pg_query($conexion, $strPermisosTableExistsSQL);
     if(pg_prepare($conexion, $strPermisosTableExistsSQLName, $strPermisosTableExistsSQL)) {
       $result = pg_execute($conexion, $strPermisosTableExistsSQLName);
       $fetchArr = pg_fetch_all($result);
