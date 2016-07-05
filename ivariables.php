@@ -238,12 +238,11 @@ if($archivoActual <> "index.php")
 
 	// MENUS
 	include("modulos/menus.php");
-/*
+
 	// SECCIONES
 	include("modulos/secciones.php");
 
 	// IMAGENES
 	include("modulos/imagenes.php");
-*/
 }
 ?>
