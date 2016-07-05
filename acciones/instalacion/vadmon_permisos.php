@@ -10,8 +10,9 @@ pg_query($conexion, $strCreatePermisosTableSQL);
 // Creamos limite de contenidos principales
 $strInsertBasicPermisosSQL = 'INSERT INTO vadmon_permisos (';
 $strInsertBasicPermisosSQL .= 'id, nivelusuario, contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar';
-$strInsertBasicPermisosSQL .= 'VALUES (';
-$strInsertBasicPermisosSQL .= '1, \'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE)';
+$strInsertBasicPermisosSQL .= 'VALUES';
+$strInsertBasicPermisosSQL .= '(1, \'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE),';
+$strInsertBasicPermisosSQL .= '(2, \'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE),';
 $strInsertBasicPermisosSQLName = 'insertBasicPermisos';
 if(pg_prepare($conexion, $strInsertBasicPermisosSQLName, $strInsertBasicPermisosSQL))
 {
