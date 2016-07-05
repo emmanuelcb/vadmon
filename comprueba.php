@@ -3,7 +3,7 @@ include("planconexion.php");
 include("inicioSesionVAdmonClass.php");
 $claseVAdmon = new inicioSesionVAdmonClass;
 $claseVAdmon->sesionSeguraVAdmonInicio();
-include ('conexion.php');
+//include ('conexion.php');
 
 $strCompruebaSQLName = 'compruebaUsuario';
 $strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios where nick = $1 AND password = $2';
