@@ -67,11 +67,9 @@ if($archivoActual <> "index.php")
 	$versionCliente = '';
   	$strVersionTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strVersionTableExistsSQL .= 'WHERE table_schema = \'vadmon_version\'';
-  	$strVersionTableExistsSQLName = 'isThereExistingVersionTable';
-	if(pg_prepare($conexion, $strVersionTableExistsSQLName, $strVersionTableExistsSQL)) {
-      	$result = pg_execute($conexion, $strVersionTableSQLName);
-  		$fetchArr = pg_fetch_all($result);
-		if(sizeof($fecthArray) == 0) {
+	if($rslVersionTable = pg_query($conexion, $strVersionTableExistsSQL))
+    {
+		if(pg_num_rows($rslVersionTable) == 0) {
 			include("acciones/instalacion/vadmon_version.php");
 		}
 	}
@@ -91,13 +89,11 @@ if($archivoActual <> "index.php")
 
 	// TRAIGO LOS DATOS DEL USUARIO
 	if(isset($_COOKIE['idUsuario'])){
-      	$strUsuariosTableExistsSQLName = 'isThereExistingUsuariosTable';
       	$strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
       	$strUsuariosTableExistsSQL .= 'WHERE table_schema = \'vadmon_usuarios\'';
-      	if(pg_prepare($conexion, $strUsuariosTableExistsSQLName, $strUsuariosTableExistsSQL)){
-          	$result = pg_execute($conexion, $strUsuariosTableExistsSQLName);
-          	$fetchArr = pg_fetch_all($result);
-          	if(sizeof($fetchArr) == 0){
+      	if($rslUsuariosTable = pg_query($conexion, $strUsuariosTableExistsSQL))
+        {
+          	if(pg_num_rows($rslUsuariosTable) == 0){
               	include("acciones/instalacion/vadmon_usuarios.php");
             }
         }
@@ -108,6 +104,7 @@ if($archivoActual <> "index.php")
 			$result = pg_execute($conexion, $strUserDetailsSQLName, array($_COOKIE["idUsuario"]));
 			$fetchArr = pg_fetch_all($result);
 			while($row = pg_fetch_assoc($result)){
+              	print_r($row);
 				$usuarionombre 		= $row['nombre'];
 				$usuarioapellidos 	= $row['apellidos'];
 				$usuarioavatar 		= $row['avatar'];
