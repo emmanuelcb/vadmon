@@ -108,7 +108,7 @@ if($archivoActual <> "index.php")
 		if(pg_prepare($conexion, $strUserDetailsSQLName, $strUserDetailsSQL)){
 			$result = pg_execute($conexion, $strUserDetailsSQLName, array($_COOKIE["idUsuario"]));
 			$fetchArr = pg_fetch_all($result);
-			while($row = pg_fetch_array($result)){
+			while($row = pg_fetch_assoc($result)){
 				$usuarionombre 		= $row['nombre'];
 				$usuarioapellidos 	= $row['apellidos'];
 				$usuarioavatar 		= $row['avatar'];
@@ -133,7 +133,7 @@ if($archivoActual <> "index.php")
       	$strPermisosDetailsSQLName = 'getPermisosDetails';
 		if(pg_prepare($conexion, $strPermisosDetailsSQLName, $strPermisosDetailsSQL)){
 			$result = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
-			while($row = pg_fetch_array($result)){
+			while($row = pg_fetch_assoc($result)){
 				$pcontenidos	= $row['contenidos'];
 				$pnoticias		= $row['noticias'];
 				$particulos		= $row['articulos'];
@@ -189,7 +189,7 @@ if($archivoActual <> "index.php")
     $strConfiguracionDetailsSQLName = 'GetConfiguracionDetails';
 	if(pg_prepare($conexion, $strConfiguracionDetailsSQLName, $strConfiguracionDetailsSQL)){
 		$result = pg_execute($conexion, $strConfiguracionDetailsSQLName);
-		while($row = pg_fetch_array($result)){
+		while($row = pg_fetch_assoc($result)){
 			$limiteContenidos = $row['campo1'];
 		}
 	}
@@ -207,7 +207,7 @@ if($archivoActual <> "index.php")
 				$opcionSubcontenidos.='<option value="0">ninguna</option>';
 			}
 			//CONTENIDOS PRINCIPALES
-			while($contenido = pg_fetch_array($contenidos))
+			while($contenido = pg_fetch_assoc($contenidos))
             {
 				$opcionSubcontenidos.='<option value="'.$rowA["id"].'">'.$rowA["menucontenido"].'</option>';
               	$strSubcontenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = \''.$contenido['id'].'\' ORDER BY ordercontenido';
