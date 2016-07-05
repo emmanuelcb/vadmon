@@ -232,10 +232,10 @@ if($archivoActual <> "index.php")
 
 	// MENSAJES
 	include("modulos/mensajes.php");
-/*
+
 	// USUARIOS
 	include("modulos/usuarios.php");
-
+/*
 	// MENUS
 	include("modulos/menus.php");
 
