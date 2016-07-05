@@ -5,9 +5,9 @@ $claseVAdmon = new inicioSesionVAdmonClass;
 $claseVAdmon->sesionSeguraVAdmonInicio();
 include ('conexion.php');
 
-$strCompruebaSQLName = 'comprubaUsuario';
+$strCompruebaSQLName = 'compruebaUsuario';
 $strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios where nick = $1 AND password = $2';
-if(pg_prepare($conexion, $strCompruebaSQLName, $strCompruebaSQL))
+/*if(pg_prepare($conexion, $strCompruebaSQLName, $strCompruebaSQL))
 {
 	$rslComprueba = pg_execute($conexion, $strCompruebaSQLName, array($_POST["usuario"], $_POST["contrasenia"]));
   	$fetchComprueba = pg_fetch_all($rslComprueba);
@@ -20,5 +20,5 @@ if(pg_prepare($conexion, $strCompruebaSQLName, $strCompruebaSQL))
 			header("location: inicio.php?mensaje=correctoUsuario&nombreUsuario=".$rowComprueba['nick']);
 		}
 	}
-}
+}*/
 ?>
