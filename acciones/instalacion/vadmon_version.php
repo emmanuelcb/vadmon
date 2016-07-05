@@ -6,6 +6,6 @@ pg_query($conexion, $strCreateVersionTableSQL);
 $strInsertVersionSQL = 'INSERT INTO vadmon_version (version) VALUES ($1)';
 if($rslInsertVersion = pg_query_params($conexion, $strInsertVersionSQL, array($version_vadmon)))
 {
-  	// To do...
+  	echo 'new version added';
 }
 ?>
