@@ -34,7 +34,6 @@ if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
   	$fetchArr = pg_fetch_all($result);
 	if(sizeof(fetchArr) > 0) {
       	while($row = pg_fetch_array($result) {
-          	print_r($row);
 			$Id_p = $row['id'];
 			$Usuario_p = $row['usuario'];
 			$PlanUsuarios_p = $row['planusuarios'];
@@ -56,5 +55,6 @@ if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
 	}
 }
 $strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
+echo $strPgConnection;
 $conexion = pg_connect($strPgConnection);*/
 ?>
