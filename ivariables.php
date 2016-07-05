@@ -81,11 +81,12 @@ if($archivoActual <> "index.php")
 		$result = pg_execute($conexion, $strVersionDetailsSQLName);
 		while($row = pg_fetch_assoc($result)){
 			$versionCliente = $row['version'];
+          	echo $row['version'];
 		}
 		if(!isset($_GET["version"])){
 			if($versionCliente < $version_vadmon){
 				$actSig = $versionCliente;
-				header( "location:inicio.php?mensaje=actualizacion&version=".$actSig);
+				//header( "location:inicio.php?mensaje=actualizacion&version=".$actSig);
 			}
 		}
 	}
