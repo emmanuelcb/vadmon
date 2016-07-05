@@ -11,10 +11,11 @@ if($rslComprueba = pg_query_params($conexion, $strCompruebaSQL, array($_POST["us
 	if(pg_num_rows($rslComprueba) > 0) {
 		while($rowComprueba = pg_fetch_assoc($rslComprueba))
         {
-			setcookie("idUsuario", "".$rowComprueba['id']."", time()+(3600 * 24));
+			/*setcookie("idUsuario", "".$rowComprueba['id']."", time()+(3600 * 24));
 			setcookie("nivelUsuario", "".$rowComprueba['nivelusuario']."", time()+(3600 * 24));
 			setcookie("loggedin", "".$rowComprueba['nick']."", time()+(3600 * 24));
-			header("location: inicio.php?mensaje=correctoUsuario&nombreUsuario=".$rowComprueba['nick']);
+			header("location: inicio.php?mensaje=correctoUsuario&nombreUsuario=".$rowComprueba['nick']);*/
+          	print_r($rowComprueba);
 		}
 	}
 }
