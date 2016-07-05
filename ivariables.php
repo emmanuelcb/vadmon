@@ -275,7 +275,7 @@ if($archivoActual <> "index.php")
       $strInsertUsrSQL = 'INSERT INTO vadmon_usuarios (nick, password, nombre, apellidos, email, avatar, nivelusuario, activo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
       if($rslInsertUsr = pg_query_params($conexion, $strInsertUsrSQL, array('admin','admin','Administrador','Cruz','emmanuel.cb@outlook.com','avatar.jpg','maestro', TRUE)))
       {
-          echo 'User Inserted';
+          //echo 'User Inserted';
       }
     }
 }
