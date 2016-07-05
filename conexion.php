@@ -54,7 +54,7 @@ if($rslGetPlan = pg_query_params($planconexion, $strGetPlanSQL, array($idSesion)
 		}
 	}
 }
-/*$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
+$strPgConnection = 'dbname='.$DBDominio.' host='.$HostDominio.' port=5432 user='.$UserDominio.' password='.$PassDominio.' sslmode=require';
 echo $strPgConnection;
-$conexion = pg_connect($strPgConnection);*/
+// $conexion = pg_connect($strPgConnection);
 ?>
