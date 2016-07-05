@@ -78,7 +78,7 @@ if($archivoActual <> "index.php")
   	$strVersionDetailsSQL = 'SELECT version FROM vadmon_version LIMIT 1';
     if($rslVersionDetails = pg_query($conexion, $strVersionDetailsSQL))
     {
-      	print_r($rslVersionDetails));
+      	print_r($rslVersionDetails);
 		while($row = pg_fetch_assoc($rslVersionDetails)){
 			$versionCliente = $row['version'];
 		}
