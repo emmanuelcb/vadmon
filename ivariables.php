@@ -253,6 +253,7 @@ if($archivoActual <> "index.php")
       $result = pg_execute($conexion, $strPermisosTableExistsSQLName);
       $fetchArr = pg_fetch_all($result);
       if(sizeof($fetchArr) == 0) {
+        echo 'Instalamos Permisos';
         include("acciones/instalacion/vadmon_permisos.php");
       }
     }
@@ -265,6 +266,7 @@ if($archivoActual <> "index.php")
       $result = pg_execute($conexion, $strUsuariosTableExistsSQLName);
       $fetchArr = pg_fetch_all($result);
       if(sizeof($fetchArr) == 0){
+        echo 'Instalamos Permisos';
         include("acciones/instalacion/vadmon_usuarios.php");
         $needNewUser = true;
       }
@@ -272,6 +274,7 @@ if($archivoActual <> "index.php")
   	// CREAMOS EL PRIMER USUARIO SI ESTE NO EXISTE
   	if($needNewUser)
     {
+      echo 'Insertamos Usuario';
       // Colocamos la version actual
       $strInsertUsrSQL = 'INSERT INTO vadmon_usuarios (nick, password, nombre, apellidos, email, avatar, nivelusuario, activo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
       $strInsertUsrSQLName = 'insertUsr';
