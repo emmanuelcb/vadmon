@@ -30,8 +30,10 @@ if(isset($_SESSION["idUsuarioVAdmon"])){
 $strGetPlanSQL = 'SELECT id, usuario, planusuarios, planpermisos, planarticulos, plannoticias, planencuestas, planpromociones, plandisenio, planregistro, servidor, servidorbd, servidorusuario, servidorpass, servidorftpdirectorio, servidorftpusuario, servidorftppass FROM vadmon_planes WHERE id = $1 LIMIT 1';
 $strGetPlanSQLName = 'getPlan';
 echo 'START! '.$idSesion;
+$query = pg_query($planconexion, $strGetPlanSQL, array($idSesion));
+echo 'Query: '.$query;
 if(pg_prepare($planconexion, $strGetPlanSQLName, $strGetPlanSQL)) {
-  	$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
+  	/*$result = pg_execute($planconexion, $strGetPlanSQLName, array($idSesion));
   	$fetchArr = pg_fetch_all($result);
   	print_r($fetchArr);
 	if(sizeof(fetchArr) > 0) {
