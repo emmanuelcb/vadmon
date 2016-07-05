@@ -101,10 +101,8 @@ if($archivoActual <> "index.php")
       	$strUserDetailsSQL .= 'FROM vadmon_usuarios WHERE id = $1';
       	$strUserDetailsSQLName = 'GetUserDetails';
 		if(pg_prepare($conexion, $strUserDetailsSQLName, $strUserDetailsSQL)){
-			$result = pg_execute($conexion, $strUserDetailsSQLName, array($_COOKIE["idUsuario"]));
-			$fetchArr = pg_fetch_all($result);
-			while($row = pg_fetch_assoc($result)){
-              	print_r($row);
+			$rslUserDetails = pg_execute($conexion, $strUserDetailsSQLName, array($_COOKIE["idUsuario"]));
+			while($row = pg_fetch_assoc($rslUserDetails)){
 				$usuarionombre 		= $row['nombre'];
 				$usuarioapellidos 	= $row['apellidos'];
 				$usuarioavatar 		= $row['avatar'];
@@ -117,19 +115,18 @@ if($archivoActual <> "index.php")
 	if(isset($_COOKIE['nivelUsuario'])){
       	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     	$strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
-      	$strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
-		if(pg_prepare($conexion, $strPermisosTableExistsSQLName, $strPermisosTableExistsSQL)) {
-			$result = pg_execute($conexion, $strPermisosTableExistsSQLName);
-          	$fetchArr = pg_fetch_all($result);
-			if(sizeof($fetchArr) == 0) {
+		if($rslPermisosTable = pg_query($conexion, $strPermisosTableExistsSQL))
+        {
+			if(pg_num_rows($rslPermisosTable) == 0) {
 				include("acciones/instalacion/vadmon_permisos.php");
 			}
 		}
       	$strPermisosDetailsSQL = 'SELECT contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar FROM vadmon_permisos WHERE nivelusuario = $1';
       	$strPermisosDetailsSQLName = 'getPermisosDetails';
 		if(pg_prepare($conexion, $strPermisosDetailsSQLName, $strPermisosDetailsSQL)){
-			$result = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
-			while($row = pg_fetch_assoc($result)){
+			$rslPermisosDetails = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
+			while($row = pg_fetch_assoc($rslPermisosDetails))
+            {
 				$pcontenidos	= $row['contenidos'];
 				$pnoticias		= $row['noticias'];
 				$particulos		= $row['articulos'];
@@ -152,40 +149,33 @@ if($archivoActual <> "index.php")
 	// REVISO NUMERO DE CONTENIDOS Y EL LIMITE
     $strContenidosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strContenidosTableExistsSQL .= 'WHERE table_schema = \'vadmon_contenidos\'';
-    $strContenidosTableExistsSQLName = 'isThereExistingContenidosTable';
-	if(pg_prepare($conexion, $strContenidosTableExistsSQLName, $strContenidosTableExistsSQL)) {
-		$result = pg_execute($conexion, $strContenidosTableExistsSQLName);
-		$fetchArr = pg_fetch_all($result);
-		if(sizeof($fetchArr) == 0) {
+	if($rslContenidosTable = pg_query($conexion, $strContenidosTableExistsSQL))
+    {
+		if(pg_num_rows($rslContenidosTable) == 0) {
 			include("acciones/instalacion/vadmon_contenidos.php");
 		}
 	}
     $strTotalContenidosSQL = 'SELECT id, menucontenido, subcontenido, activo ';
     $strTotalContenidosSQL .= 'FROM vadmon_contenidos WHERE subcontenido=0 and activo=1';
-    $strTotalContenidosSQLName = 'GetTotalContenidos';
-	if(pg_prepare($conexion, $strTotalContenidosSQLName, $strTotalContenidosSQL)){
-		$result = pg_execute($conexion, $strTotalContenidosSQLName);
-		$fetchArr = pg_fetch_all($result);
-		$numeroContenidos = sizeof($fetchArr);
+	if($rslTotalContenidos = pg_query($conexion, $strTotalContenidosSQL))
+    {
+		$numeroContenidos = pg_num_rows($rslTotalContenidos);
 	}
     
   	// REVISO LA CONFIGURACION
     $strConfigurationTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strConfigurationTableExistsSQL .= 'WHERE table_schema = \'vadmon_configuracion\'';
-    $strConfigurationTableExistsSQLName = 'isThereExistingConfiguracionTable';
-	if(pg_prepare($conexion, $strConfigurationTableExistsSQLName, $strConfigurationTableExistsSQL)) {
-		$result = pg_execute($conexion, $strConfigurationTableExistsSQLName);
-		$fetchArr = pg_fetch_all($result);
-		if(sizeof($fetchArr) == 0) {
+	if($rslConfigurationTable = pg_query($conexion, $strConfigurationTableExistsSQLName, $strConfigurationTableExistsSQL))
+    {
+		if(pg_num_rows($rslConfigurationTable) == 0) {
 			include("acciones/instalacion/vadmon_configuracion.php");
 		}
 	}
     $strConfiguracionDetailsSQL = 'SELECT herramienta, campo1, campo2, activo FROM vadmon_configuracion ';
     $strConfiguracionDetailsSQL .= 'WHERE herramient = \'limitecontenidos\' AND activo = TRUE LIMIT0,1';
-    $strConfiguracionDetailsSQLName = 'GetConfiguracionDetails';
-	if(pg_prepare($conexion, $strConfiguracionDetailsSQLName, $strConfiguracionDetailsSQL)){
-		$result = pg_execute($conexion, $strConfiguracionDetailsSQLName);
-		while($row = pg_fetch_assoc($result)){
+	if($rslConfiguracionDetails = pg_query($conexion, $strConfiguracionDetailsSQL))
+    {
+		while($row = pg_fetch_assoc($rslConfiguracionDetails)){
 			$limiteContenidos = $row['campo1'];
 		}
 	}
@@ -193,11 +183,9 @@ if($archivoActual <> "index.php")
 	// LEE SUBCONTENIDOS
 	$opcionSubcontenidos="";
     $strContenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = 0 ORDER BY ordencontenido';
-    $strContenidosDetailsSQLName = 'GetContenidosDetails';
-	if(pg_prepare($conexion, $strContenidosDetailsSQLName, $strContenidosDetailsSQL)){
-		$contenidos = pg_execute($conexion, $strContenidosDetailsSQLName);
-      	$fetchArr = pg_fetch_all($contenidos);
-		if(sizeof($fetchArr) > 0){
+	if($rslContenidosDetails = pg_query($conexion, $strContenidosDetailsSQL))
+    {
+		if(pg_num_rows($rslContenidosDetails) > 0){
 			$opcionSubcontenidos.='<select name="subcontenido" style="width:210px;">';
 			if($numeroContenidos < $limiteContenidos){
 				$opcionSubcontenidos.='<option value="0">ninguna</option>';
@@ -206,13 +194,13 @@ if($archivoActual <> "index.php")
 			while($contenido = pg_fetch_assoc($contenidos))
             {
 				$opcionSubcontenidos.='<option value="'.$rowA["id"].'">'.$rowA["menucontenido"].'</option>';
-              	$strSubcontenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = \''.$contenido['id'].'\' ORDER BY ordercontenido';
+              	$strSubcontenidosDetailsSQL = 'SELECT id, menucontenido FROM vadmon_contenidos WHERE activo = TRUE AND subcontenido = $1 ORDER BY ordercontenido';
               	$strSubcontenidosDetailsSQLName = 'GetSubcontenidosDetails';
 				if(pg_prepare($conexion, $strSubcontenidosDetailsSQLName, $strSubcontenidosDetailsSQL))
                 {
-                  	$subcontenidos = pg_execute($conexion, $strSubcontenidosDetailsSQLName);
+                  	$subcontenidos = pg_execute($conexion, $strSubcontenidosDetailsSQLName, array($contenido['id']));
 					//SUBCONTENIDOS DE CONTENIDO
-					while($subcontenido = pg_fetch_array($subcontenidos)){
+					while($subcontenido = pg_fetch_assoc($subcontenidos)){
 						$opcionSubcontenidos.='<option value="'.$subcontenido['id'].'">&nbsp;&nbsp;&nbsp;'.$subcontenido['menucontenido'].'</option>';
 					}
 				}
@@ -243,23 +231,19 @@ if($archivoActual <> "index.php")
   	// REVISA SI EXISTE LA TABLA DE PERMISOS
   	$strPermisosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strPermisosTableExistsSQL .= 'WHERE table_schema = \'vadmon_permisos\'';
-    $strPermisosTableExistsSQLName = 'isThereExistingPermisosTable';
-    if(pg_prepare($conexion, $strPermisosTableExistsSQLName, $strPermisosTableExistsSQL)) {
-      $result = pg_execute($conexion, $strPermisosTableExistsSQLName);
-      $fetchArr = pg_fetch_all($result);
-      if(sizeof($fetchArr) == 0) {
+    if($rslPermisosTable = pg_query($conexion, $strPermisosTableExistsSQL))
+    {
+      if(pg_num_rows($rslPermisosTable) == 0) {
         include("acciones/instalacion/vadmon_permisos.php");
       }
     }
   	// REVISA SI EXISTE LA TABLA DE USUARIOS
   	$needNewUser = false;
-	$strUsuariosTableExistsSQLName = 'isThereExistingUsuariosTable';
     $strUsuariosTableExistsSQL = 'SELECT table_name FROM information_schema.tables ';
     $strUsuariosTableExistsSQL .= 'WHERE table_schema = \'vadmon_usuarios\'';
-    if(pg_prepare($conexion, $strUsuariosTableExistsSQLName, $strUsuariosTableExistsSQL)){
-      $result = pg_execute($conexion, $strUsuariosTableExistsSQLName);
-      $fetchArr = pg_fetch_all($result);
-      if(sizeof($fetchArr) == 0){
+    if($rslUsuariosTable = pg_query($conexion, $strUsuariosTableExistsSQL))
+    {
+      if(pg_num_rows($rslUsuariosTable) == 0){
         include("acciones/instalacion/vadmon_usuarios.php");
         $needNewUser = true;
       }
