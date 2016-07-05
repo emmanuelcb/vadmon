@@ -9,7 +9,6 @@ $strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios
 if($rslComprueba = pg_query_params($conexion, $strCompruebaSQL, array($_POST["usuario"], $_POST["contrasenia"])))
 {
 	if(pg_num_rows($rslComprueba) > 0) {
-      	echo 'there is an existing usuario';
 		while($rowComprueba = pg_fetch_assoc($rslComprueba))
         {
 			setcookie("idUsuario", "".$rowComprueba['id']."", time()+(3600 * 24));
