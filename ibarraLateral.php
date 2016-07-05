@@ -5,7 +5,6 @@
   if($existeCookie != true){
     include('identificacion.php');
   }else{
-    echo 'include menuLateral.php';
     include('menuLateral.php');
   }
 ?>
