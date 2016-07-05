@@ -10,6 +10,8 @@ $strCompruebaSQL = 'SELECT id, nivelusuario, nick, password FROM vadmon_usuarios
 if(pg_prepare($conexion, $strCompruebaSQLName, $strCompruebaSQL))
 {
 	$rslComprueba = pg_execute($conexion, $strCompruebaSQLName, array($_POST["usuario"], $_POST["contrasenia"]));
+  	print_r($rslComprueba);
+  	echo '<br/>Size '.sizeof($rslComprueba);
 	if(sizeof($rslComprueba) > 0) {
 		while($rowComprueba = pg_fetch_assoc($rslComprueba))
         {
