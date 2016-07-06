@@ -234,19 +234,9 @@ if($archivoActual <> "index.php")
     if($rslPermisosTable = pg_query($conexion, $strPermisosTableExistsSQL))
     {
       if(pg_num_rows($rslPermisosTable) == 0) {
+        echo claseFunciones->log('include vadmon_permisos.php');
         include("acciones/instalacion/vadmon_permisos.php");
       }
-    }
-  	// Creamos limite de contenidos principales
-    $strInsertBasicPermisosSQL = 'INSERT INTO vadmon_permisos ';
-    $strInsertBasicPermisosSQL .= '(nivelusuario, contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar)';
-    $strInsertBasicPermisosSQL .= ' VALUES ';
-    $strInsertBasicPermisosSQL .= '(\'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE);';
-  	echo $strInsertBasicPermisosSQL;
-    if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
-    {
-        echo 'BasicPermisosCreated<br/>';
-        print_r(pg_fetch_all($rslInsertBasicPermisos));
     }
   	// REVISA SI EXISTE LA TABLA DE USUARIOS
   	$needNewUser = false;
@@ -255,6 +245,7 @@ if($archivoActual <> "index.php")
     if($rslUsuariosTable = pg_query($conexion, $strUsuariosTableExistsSQL))
     {
       if(pg_num_rows($rslUsuariosTable) == 0){
+        echo claseFunciones->log('include vadmon_usuarios.php');
         include("acciones/instalacion/vadmon_usuarios.php");
         $needNewUser = true;
       }
@@ -266,7 +257,7 @@ if($archivoActual <> "index.php")
       $strInsertUsrSQL = 'INSERT INTO vadmon_usuarios (nick, password, nombre, apellidos, email, avatar, nivelusuario, activo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
       if($rslInsertUsr = pg_query_params($conexion, $strInsertUsrSQL, array('admin','admin','Administrador','Cruz','emmanuel.cb@outlook.com','avatar.jpg','maestro', TRUE)))
       {
-          //echo 'User Inserted';
+          echo claseFunciones->log('User Inserted');
       }
     }
 }
