@@ -8,7 +8,7 @@
 	   if($existeCookie == true){ 
           include('icontenido.php');
        }else{ ?>
-		chu chu chu
+          chu chu chu
 	  <?php } ?>
     </td>
   </tr>
