@@ -122,7 +122,6 @@ if($archivoActual <> "index.php")
 			}
 		}
       	$strPermisosDetailsSQL = 'SELECT * FROM vadmon_permisos WHERE nivelusuario = $1';
-      	echo $_COOKIE['nivelUsuario'];
 		if($rslPermisosDetails = pg_query_params($conexion, $strPermisosDetailsSQL, array($_COOKIE['nivelUsuario'])))
         {
 			while($row = pg_fetch_assoc($rslPermisosDetails))
@@ -237,6 +236,17 @@ if($archivoActual <> "index.php")
       if(pg_num_rows($rslPermisosTable) == 0) {
         include("acciones/instalacion/vadmon_permisos.php");
       }
+    }
+  	// Creamos limite de contenidos principales
+    $strInsertBasicPermisosSQL = 'INSERT INTO vadmon_permisos (';
+    $strInsertBasicPermisosSQL .= 'id, nivelusuario, contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar';
+    $strInsertBasicPermisosSQL .= 'VALUES';
+    $strInsertBasicPermisosSQL .= '(1, \'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE),';
+    $strInsertBasicPermisosSQL .= '(2, \'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE)';
+    if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
+    {
+        echo 'BasicPermisosCreated<br/>';
+        print_r(pg_fetch_all($rslInsertBasicPermisos));
     }
   	// REVISA SI EXISTE LA TABLA DE USUARIOS
   	$needNewUser = false;
