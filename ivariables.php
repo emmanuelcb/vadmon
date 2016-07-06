@@ -234,7 +234,7 @@ if($archivoActual <> "index.php")
     if($rslPermisosTable = pg_query($conexion, $strPermisosTableExistsSQL))
     {
       if(pg_num_rows($rslPermisosTable) == 0) {
-        echo claseFunciones->log('include vadmon_permisos.php');
+        echo $claseFunciones->log('include vadmon_permisos.php');
         include("acciones/instalacion/vadmon_permisos.php");
       }
     }
@@ -245,7 +245,7 @@ if($archivoActual <> "index.php")
     if($rslUsuariosTable = pg_query($conexion, $strUsuariosTableExistsSQL))
     {
       if(pg_num_rows($rslUsuariosTable) == 0){
-        echo claseFunciones->log('include vadmon_usuarios.php');
+        echo $claseFunciones->log('include vadmon_usuarios.php');
         include("acciones/instalacion/vadmon_usuarios.php");
         $needNewUser = true;
       }
@@ -257,7 +257,7 @@ if($archivoActual <> "index.php")
       $strInsertUsrSQL = 'INSERT INTO vadmon_usuarios (nick, password, nombre, apellidos, email, avatar, nivelusuario, activo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
       if($rslInsertUsr = pg_query_params($conexion, $strInsertUsrSQL, array('admin','admin','Administrador','Cruz','emmanuel.cb@outlook.com','avatar.jpg','maestro', TRUE)))
       {
-          echo claseFunciones->log('User Inserted');
+          echo $claseFunciones->log('User Inserted');
       }
     }
 }
