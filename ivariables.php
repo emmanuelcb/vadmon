@@ -241,7 +241,7 @@ if($archivoActual <> "index.php")
     $strInsertBasicPermisosSQL = 'INSERT INTO vadmon_permisos ';
     $strInsertBasicPermisosSQL .= '(nivelusuario, contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar)';
     $strInsertBasicPermisosSQL .= ' VALUES ';
-    $strInsertBasicPermisosSQL .= '(\'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE)';
+    $strInsertBasicPermisosSQL .= '(\'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE);';
   	echo $strInsertBasicPermisosSQL;
     if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
     {
