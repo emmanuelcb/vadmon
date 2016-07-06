@@ -125,6 +125,8 @@ if($archivoActual <> "index.php")
       	$strPermisosDetailsSQLName = 'getPermisosDetails';
 		if(pg_prepare($conexion, $strPermisosDetailsSQLName, $strPermisosDetailsSQL)){
 			$rslPermisosDetails = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
+          	echo 'Permisos<br/>';
+          	print_r(pg_fetch_all(rslPermisosDetails));
 			while($row = pg_fetch_assoc($rslPermisosDetails))
             {
 				$pcontenidos	= $row['contenidos'];
