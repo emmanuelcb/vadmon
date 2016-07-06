@@ -121,12 +121,13 @@ if($archivoActual <> "index.php")
 				include("acciones/instalacion/vadmon_permisos.php");
 			}
 		}
-      	$strPermisosDetailsSQL = 'SELECT contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar FROM vadmon_permisos WHERE nivelusuario = $1';
+      	$strPermisosDetailsSQL = 'SELECT * FROM vadmon_permisos WHERE nivelusuario = $1';
       	$strPermisosDetailsSQLName = 'getPermisosDetails';
+      	echo $strPermisosDetailsSQL.'<br/>';
 		if(pg_prepare($conexion, $strPermisosDetailsSQLName, $strPermisosDetailsSQL)){
 			$rslPermisosDetails = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
           	echo 'Permisos<br/>';
-          	print_r(pg_fetch_all(rslPermisosDetails));
+          	print_r(pg_fetch_all($rslPermisosDetails));
 			while($row = pg_fetch_assoc($rslPermisosDetails))
             {
 				$pcontenidos	= $row['contenidos'];
