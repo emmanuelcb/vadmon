@@ -122,11 +122,12 @@ if($archivoActual <> "index.php")
 			}
 		}
       	$strPermisosDetailsSQL = 'SELECT * FROM vadmon_permisos WHERE nivelusuario = $1';
+      	echo $_COOKIE['nivelUsuario'];
 		if($rslPermisosDetails = pg_query_params($conexion, $strPermisosDetailsSQL, array($_COOKIE['nivelUsuario'])))
         {
-          	print_r($rslPermisosDetails);
 			while($row = pg_fetch_assoc($rslPermisosDetails))
             {
+              	print_r($row);
 				$pcontenidos	= $row['contenidos'];
 				$pnoticias		= $row['noticias'];
 				$particulos		= $row['articulos'];
