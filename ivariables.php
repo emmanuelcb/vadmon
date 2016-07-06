@@ -122,12 +122,9 @@ if($archivoActual <> "index.php")
 			}
 		}
       	$strPermisosDetailsSQL = 'SELECT * FROM vadmon_permisos WHERE nivelusuario = $1';
-      	$strPermisosDetailsSQLName = 'getPermisosDetails';
-      	echo $strPermisosDetailsSQL.'<br/>';
-		if(pg_prepare($conexion, $strPermisosDetailsSQLName, $strPermisosDetailsSQL)){
-			$rslPermisosDetails = pg_execute($conexion, $strPermisosDetailsSQLName, array($_COOKIE['nivelUsuario']));
-          	echo 'Permisos<br/>';
-          	print_r(pg_fetch_all($rslPermisosDetails));
+		if($rslPermisosDetails = pg_query_params($conexion, $strPermisosDetailsSQL, array($_COOKIE['nivelUsuario'])))
+        {
+          	print_r($rslPermisosDetails);
 			while($row = pg_fetch_assoc($rslPermisosDetails))
             {
 				$pcontenidos	= $row['contenidos'];
