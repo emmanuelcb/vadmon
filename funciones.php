@@ -5,7 +5,7 @@ class claseFunciones{
 	}
   
   	function log($cadena){
-      	return '<script>alert('.$cadena.')</script>';
+      	return '<script>alert(\''.$cadena.'\');</script>';
     }
 }
 ?>
