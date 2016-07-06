@@ -10,7 +10,7 @@ class claseFunciones{
       $jsLog .= 'var div = document.createElement(\'div\');';
       $jsLog .= 'var txt = document.createTextNode(\''.$cadena.'\');';
       $jsLog .= 'var body = document.getElementsByTagName(\'body\');';
-      $jsLog .= 'var bodySliced = [].slice.call(body)';
+      $jsLog .= 'var bodySliced = [].slice.call(body);';
       $jsLog .= 'console.log(body);';
       $jsLog .= 'console.log(bodySliced);';
       $jsLog .= 'div.appendChild(txt);';
