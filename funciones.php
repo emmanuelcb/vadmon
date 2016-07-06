@@ -6,6 +6,7 @@ class claseFunciones{
   
   	function log($cadena){
       $jsLog = '<script>';
+      $jsLog .= 'console.log(document.getElementsByTagName(\'body\'));';
       $jsLog .= 'var frag = document.createDocumentFragment();';
       $jsLog .= 'var div = document.createElement(\'div\');';
       $jsLog .= 'var txt = document.createTextNode(\''.$cadena.'\');';
