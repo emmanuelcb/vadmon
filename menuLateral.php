@@ -1,5 +1,6 @@
 <?php
-  $htmlBarraLateral = '<table cellpadding="0" cellspacing="0" border="0"><tr>';
+  echo 'pconfiguracion '.$pconfiguracion;
+  /*$htmlBarraLateral = '<table cellpadding="0" cellspacing="0" border="0"><tr>';
   // CONFIGURACION
   if($pconfiguracion==1){
     $htmlBarraLateral .= '<td><a href="inicio.php?idcontenido=configuracion" title=""><img src="imagenes/btnConfig.png" alt="Configuracion"/></a></td>';
@@ -106,5 +107,5 @@
   }
   
   $htmlBarraLateral .= '</ul>';
-  echo $htmlBarraLateral;
+  echo $htmlBarraLateral;*/
 ?>
