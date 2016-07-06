@@ -239,10 +239,10 @@ if($archivoActual <> "index.php")
     }
   	// Creamos limite de contenidos principales
     $strInsertBasicPermisosSQL = 'INSERT INTO vadmon_permisos (';
-    $strInsertBasicPermisosSQL .= 'id, nivelusuario, contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar';
+    $strInsertBasicPermisosSQL .= 'nivelusuario, contenidos, noticias, articulos, promociones, banners, usuarios, configuracion, diseno, encuestas, basesdedatos, permisos, papelera, editar, crear, eliminar';
     $strInsertBasicPermisosSQL .= 'VALUES';
-    $strInsertBasicPermisosSQL .= '(1, \'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE),';
-    $strInsertBasicPermisosSQL .= '(2, \'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE)';
+    $strInsertBasicPermisosSQL .= '(\'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE),';
+    $strInsertBasicPermisosSQL .= '(\'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE)';
     if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
     {
         echo 'BasicPermisosCreated<br/>';
