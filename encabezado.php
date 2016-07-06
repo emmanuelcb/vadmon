@@ -15,6 +15,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     redimensionar();
+    <?php echo $jsOnReady ?>
 });
 
 tinyMCE.init({
