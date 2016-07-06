@@ -13,9 +13,8 @@ $strInsertBasicPermisosSQL .= 'id, nivelusuario, contenidos, noticias, articulos
 $strInsertBasicPermisosSQL .= 'VALUES';
 $strInsertBasicPermisosSQL .= '(1, \'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE),';
 $strInsertBasicPermisosSQL .= '(2, \'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE),';
-$strInsertBasicPermisosSQLName = 'insertBasicPermisos';
-if(pg_prepare($conexion, $strInsertBasicPermisosSQLName, $strInsertBasicPermisosSQL))
+if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
 {
-	pg_execute($conexion, $strInsertBasicPermisosSQLName);
+	// To do...
 }
 ?>
