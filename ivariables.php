@@ -243,6 +243,7 @@ if($archivoActual <> "index.php")
     $strInsertBasicPermisosSQL .= ' VALUES ';
     $strInsertBasicPermisosSQL .= '(\'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE ,TRUE),';
     $strInsertBasicPermisosSQL .= '(\'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE)';
+  	echo $strInsertBasicPermisosSQL;
     if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
     {
         echo 'BasicPermisosCreated<br/>';
