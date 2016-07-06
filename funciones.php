@@ -5,7 +5,16 @@ class claseFunciones{
 	}
   
   	function log($cadena){
-      	return '<script>alert(\''.$cadena.'\');</script>';
+      $jsLog = '<script>';
+      $jsLog .= 'var frag = document.createDocumentFragment();';
+      $jsLog .= 'var div = document.createElement(\'div\');';
+      $jsLog .= 'var txt = document.createTextNode(\''.$cadena.'\')';
+      $jsLog .= 'div.appendChild(txt);';
+      $jsLog .= 'div.setAttribute(\'style\', \'display:block;position:fixed;z-index:99;background-color:rgba(0,0,0,0.5);width:100%;height:50px;color:rgba(255,255,255,0.5);\');';
+      $jsLog .= 'frag.appendChild(div);';
+      $jsLog .= 'document.getElementByTagName(\'body\')[0].appendChild(frag);'
+      $jsLog .= '</script>';
+      return $jsLog;
     }
 }
 ?>
