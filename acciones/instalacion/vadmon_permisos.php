@@ -15,6 +15,7 @@ $strInsertBasicPermisosSQL .= '(1, \'maestro\', TRUE, TRUE, TRUE, TRUE, TRUE, TR
 $strInsertBasicPermisosSQL .= '(2, \'invitado\', TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE ,FALSE)';
 if($rslInsertBasicPermisos = pg_query($conexion, $strInsertBasicPermisosSQL))
 {
-	// To do...
+	echo 'BasicPermisosCreated<br/>';
+    print_r(pg_fetch_all($rslInsertBasicPermisos));
 }
 ?>
